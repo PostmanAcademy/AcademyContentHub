@@ -1,0 +1,947 @@
+const { useState, useMemo, useEffect } = React;
+
+// ═══════════════════════════════════════════════════════════════
+// DATA LAYER
+// ═══════════════════════════════════════════════════════════════
+
+const SITE = {
+  title: "Postman Academy",
+  subtitle: "Bootcamp & Upskilling Hub",
+  tagline: "Keeping every Postmanaut fluent in an API-first world.",
+};
+
+const BOOTCAMP_MODULES = [
+  {
+    id: "M01",
+    name: "Welcome & Psychological Safety",
+    sensitivity: "low",
+    fieldGuideLayers: [],
+    v11Slides: "1–4",
+    v12Slides: "1–3",
+    featuresReferenced: [],
+    summary: "Establishing safety, introductions, the 'future tech' icebreaker, setting expectations. This isn't a coding class — it's about shared vocabulary and collaboration.",
+    keyElements: [
+      "'This is a collaboration class' framing",
+      "Go-around: name, role, where you flew in from",
+      "Icebreaker: 'What technology made you feel like you were in the future?'",
+      "Agenda overview: what we'll cover and why",
+    ],
+    v12Addition: "Frame the day's arc: 'Postman has evolved from a collaboration-focused tool to an AI-native development platform. Today is about understanding that shift.'",
+    activity: null,
+    painPointThreaded: null,
+    updateTrigger: "Only when the bootcamp's strategic framing changes (e.g., a major company pivot).",
+  },
+  {
+    id: "M02",
+    name: "The Internet & APIs",
+    sensitivity: "low",
+    fieldGuideLayers: ["01 — The Internet as a City", "02 — APIs as Buildings"],
+    v11Slides: "5–8",
+    v12Slides: "4–6",
+    featuresReferenced: [],
+    summary: "What the internet is, what APIs are, the City Metaphor foundation. Two definitions of API (technical + human). The Bezos Mandate story. 'Apps use more than one building.'",
+    keyElements: [
+      "City Metaphor introduction: internet = city, HTTP = roads, URLs = addresses, browser = vehicle",
+      "Two definitions: technical ('a defined contract') and human ('the apps your apps use')",
+      "The Bezos Mandate as origin story for why APIs matter at scale",
+      "Netflix example: authentication, catalog, streaming, recommendations, billing = 5 buildings",
+      "Building types from Field Guide (Bank = Stripe, Hospital = EHR, Library = Wikipedia, etc.)",
+    ],
+    v12Addition: null,
+    activity: "'What APIs (buildings) would you need for a weather app?' — gets the class thinking like city planners.",
+    painPointThreaded: "Discovery — 'How do you even find the right building in a city of millions?'",
+    updateTrigger: "If Postman's company narrative about APIs fundamentally shifts.",
+  },
+  {
+    id: "M03",
+    name: "How APIs Work",
+    sensitivity: "low",
+    fieldGuideLayers: ["03 — Requests as Forms & Receptionists"],
+    v11Slides: "9–10, 14–17",
+    v12Slides: "10, 12–14",
+    featuresReferenced: [],
+    summary: "Client-server model, CRUD, HTTP methods, request/response anatomy, URLs, status codes. The 'you're already using all of this' reveal.",
+    keyElements: [
+      "The receptionist metaphor: every building has a front desk, you fill out forms (requests)",
+      "CRUD: the four things you can do with data (Create, Read, Update, Delete)",
+      "HTTP methods: GET, POST, PUT, PATCH, DELETE — mapped to receptionist interactions",
+      "Request anatomy: body = filled-out form, headers = envelope, query params = sticky notes",
+      "Status codes: 200 (approved), 404 (room doesn't exist), 401 (no badge), 500 (building on fire)",
+      "'You're already using this': scrolling social media = CRUD, visiting a URL = GET request",
+    ],
+    v12Addition: null,
+    activity: "'What HTTP method is liking a post? What about unliking?' — multiple right answers, reinforces design choices.",
+    painPointThreaded: "Testing — 'How do you know the receptionist is giving you the right response?'",
+    updateTrigger: "If new HTTP methods or API patterns become mainstream.",
+  },
+  {
+    id: "M04",
+    name: "API Design & Architecture",
+    sensitivity: "medium",
+    fieldGuideLayers: ["02 — Inside the Building", "05 — Documentation"],
+    v11Slides: "13–14",
+    v12Slides: "8–10",
+    featuresReferenced: ["API Builder/Editor", "Mock Servers", "OpenAPI spec support"],
+    summary: "REST as a design choice (not hard science), the fork analogy, API-first vs. code-first, specs vs. documentation, monolith vs. microservices.",
+    keyElements: [
+      "'Design choices, not hard science' — the fork-in-the-drawer analogy",
+      "REST as 'the sit-down restaurant' of API styles",
+      "Two Restaurants activity: Menu First vs. Sell Tomorrow → API-first vs. code-first",
+      "Specs vs. Docs: 'A spec is the blueprint filed with the city. Docs are the brochure in the lobby.'",
+      "Monolith vs. microservices: department store vs. specialist district",
+      "API versioning: 'building renovations' — /v1/ stays open while /v2/ is built",
+    ],
+    v12Addition: null,
+    activity: "Two Restaurants — class builds pros/cons for Menu First and Sell Tomorrow, then reveals the connection to API development.",
+    painPointThreaded: "Design & Documentation — 'Design decisions must happen before committing to development.'",
+    updateTrigger: "When Postman ships new design or spec-related features (e.g., SpecHub 2-way sync, new spec formats).",
+  },
+  {
+    id: "M05",
+    name: "Security & Authentication",
+    sensitivity: "medium",
+    fieldGuideLayers: ["04 — Security"],
+    v11Slides: "Implicit in hands-on",
+    v12Slides: "Not yet explicit",
+    featuresReferenced: ["Auth tab", "API key management", "OAuth 2.0 flows", "Vault integration", "Shared Vault", "Secrets Resolution"],
+    summary: "Why APIs need security, API keys, OAuth, authentication vs. authorization. Recently expanded with Secrets Resolution and Shared Vault.",
+    keyElements: [
+      "API keys = building access badge, OAuth = valet parking ticket, JWT = time-stamped visitor pass",
+      "Auth vs. authz: badge gets you in (authentication), clearance determines floors (authorization)",
+      "Rate limiting: 'The building has a maximum occupancy'",
+      "CORS: 'Some buildings only accept visitors from approved neighborhoods'",
+      "Secrets Resolution: secrets are now first-class, resolved just-in-time, never stored in plain text",
+      "Shared Vault: centralized, secure team credential management",
+    ],
+    v12Addition: "Secrets Resolution & Shared Vault (shipped April 2026) — secrets as a first-class concept with just-in-time resolution.",
+    activity: null,
+    painPointThreaded: "Security governance at scale — 'How does an organization ensure every building has proper security?'",
+    updateTrigger: "When Postman adds new auth types, changes auth UI, or ships security governance features.",
+  },
+  {
+    id: "M06",
+    name: "Git & Version Control",
+    sensitivity: "high",
+    fieldGuideLayers: ["08 — Dev Tools (partial)"],
+    v11Slides: "N/A (new)",
+    v12Slides: "15–16",
+    featuresReferenced: ["Native Git integration", "Branching", "Pull requests for API changes", "Version history", "Native Git for Flows"],
+    summary: "What Git is and why it matters, core Git concepts, why Postman went Git-native. A V12 flagship feature.",
+    keyElements: [
+      "Architects-on-blueprints metaphor: Git lets every engineer work on their own copy",
+      "Core terms: repo, branch, commit, pull request, merge",
+      "Why this matters for Postman: 'In V12, Git is native. No context switching.'",
+      "City connection: 'Git is the city's version control — every blueprint change is tracked'",
+      "Native Git for Flows: build Flows in your IDE, manage in local Git repos",
+      "Improved migration for Git-linked APIs to Spec Hub (mono-repo support)",
+    ],
+    v12Addition: "This entire module is new for V12. Native Git is a defining feature of the platform shift.",
+    activity: null,
+    painPointThreaded: null,
+    updateTrigger: "Every time Postman ships Git-related features (high frequency in V12 era).",
+  },
+  {
+    id: "M07",
+    name: "The Developer Experience",
+    sensitivity: "medium",
+    fieldGuideLayers: ["08 — Dev Tools", "10 — Personas"],
+    v11Slides: "N/A (new)",
+    v12Slides: "17–19",
+    featuresReferenced: ["Postman CLI", "CI/CD integration", "Workspace collaboration", "Environments", "Command Palette"],
+    summary: "A day in the life of a software engineer, inner vs. outer dev loop, what engineers care about, the five personas.",
+    keyElements: [
+      "Day in the life: reading code, writing code, testing, debugging, code review, meetings, docs",
+      "Inner dev loop (architect at drafting table): write → run → test → fix → repeat",
+      "Outer dev loop (review board): code review, CI/CD, staging, QA, releases",
+      "What engineers care about: speed of feedback, reducing context switching, not breaking things, ownership, trust",
+      "Five personas: API Developer, API Consumer, Platform/Architect, QA/Test Engineer, Technical Writer",
+      "Command Palette: cmd+shift+P from anywhere, 'Ask AI' for complex workflows",
+    ],
+    v12Addition: "This entire module is new for V12. Positions Postman within the developer workflow, not separate from it.",
+    activity: "'Connect these engineering activities to Postman features' — class maps day-in-the-life moments to capabilities.",
+    painPointThreaded: null,
+    updateTrigger: "When Postman adds developer workflow features (CLI changes, IDE integrations, etc.).",
+  },
+  {
+    id: "M08",
+    name: "AI & Agents",
+    sensitivity: "high",
+    fieldGuideLayers: ["06 — MCP Servers — Underground Highway"],
+    v11Slides: "N/A (new)",
+    v12Slides: "20",
+    featuresReferenced: ["Agent mode", "AI test generation", "AI debugging", "AI documentation generation", "MCP server support", "CLI Generator", "Flows AI Agent Block"],
+    summary: "What LLMs are (briefly), what makes something 'agentic,' MCP servers, Postman's AI capabilities. The fastest-moving area.",
+    keyElements: [
+      "LLMs in plain terms: pattern recognition at massive scale, probabilistic not deterministic",
+      "Agentic capabilities: when AI can use tools, not just generate text",
+      "MCP: 'The underground highway system — AI agents directly access tools through a standardized protocol'",
+      "Postman AI: Agent mode reads code, writes tests, generates stubs, debugs, creates mocks, generates docs",
+      "CLI Generator: generate a CLI for any API in one click, usable by AI agents and humans",
+      "MCP OAuth: Postman MCP servers now secured with OAuth 2.0 (spec-compliant)",
+      "Private API Network search in MCP: AI agents can access trusted internal APIs",
+      "Flows AI Agent Block v2: connect external MCP servers to Flows",
+    ],
+    v12Addition: "This entire module is new for V12. AI-native is the defining characteristic of the platform shift.",
+    activity: null,
+    painPointThreaded: null,
+    updateTrigger: "With virtually every release — this is the highest-velocity area.",
+  },
+  {
+    id: "M09",
+    name: "The Postman Platform",
+    sensitivity: "high",
+    fieldGuideLayers: ["07 — Postman — City Management Platform"],
+    v11Slides: "18–23",
+    v12Slides: "21–22",
+    featuresReferenced: ["All major product areas"],
+    summary: "What Postman is (official definition + 'architectural design software for a digital world'), the full product surface, customer stories.",
+    keyElements: [
+      "Official definition: 'An AI-native, collaborative platform for development, testing, monitoring, management, and distribution of APIs and Services'",
+      "Architecture analogy: 'Like architectural design software for a digital world'",
+      "Product surface: AI + Agent Mode, Native Git, Local Mock Servers, CLI, API Catalog, Insights, SDK Distribution",
+      "PayPal case study: reduced time-to-first-call to one minute",
+      "'Postman is the shared city management layer — different roles, same platform'",
+      "Pain points consolidated: Documentation, Discovery, Testing, Design",
+    ],
+    v12Addition: "Full product surface has expanded significantly. SDK generation now supports 6 languages. Reports update hourly.",
+    activity: null,
+    painPointThreaded: "All four pain points consolidated and demonstrated with current Postman capabilities.",
+    updateTrigger: "With any major product launch, rebrand, or capability addition.",
+  },
+  {
+    id: "M10",
+    name: "Hands-On Lab — The Grocery Store",
+    sensitivity: "high",
+    fieldGuideLayers: ["Practical application of all"],
+    v11Slides: "N/A",
+    v12Slides: "N/A",
+    featuresReferenced: ["Collections", "Workspaces", "Forking", "Auth", "Agent Mode", "Mock Servers", "Environments", "Variables", "API Network", "Partner Workspaces"],
+    summary: "The Digital Grocery Store project — a narrative-driven, hands-on sequence where the class helps a fictional grocery store modernize through APIs.",
+    keyElements: [
+      "Lab 10a — The Consumer: Send GET/POST requests, learn the UI, authenticate with API key",
+      "Lab 10b — The Teammate: Create workspace, fork collection, invite collaborators",
+      "Lab 10c — The Designer: Use Agent mode to generate an API collection from natural language",
+      "Lab 10d — The Prototyper: Create mock server, use environments and variables",
+      "Lab 10e — The Publisher: Explore API Network, publish, hand off to dev team",
+    ],
+    v12Addition: "Lab 10c leverages Agent Mode for API design — a V12-native experience.",
+    activity: "The entire module is hands-on. Five sequential labs following a single narrative arc.",
+    painPointThreaded: "Each lab surfaces a different pain point in context.",
+    updateTrigger: "Whenever the Postman UI changes (button locations, naming, flows), when Agent Mode capabilities change.",
+  },
+  {
+    id: "M11",
+    name: "API Lifecycle & Governance",
+    sensitivity: "medium",
+    fieldGuideLayers: ["11 — Example API Lifecycle"],
+    v11Slides: "23",
+    v12Slides: "Implicit",
+    featuresReferenced: ["API Catalog", "Insights", "Governance rules", "System Environments", "Account Discovery & Control"],
+    summary: "The six-phase API lifecycle, who's involved at each phase, how Postman supports each phase, governance at scale.",
+    keyElements: [
+      "Six phases: Ideation → Design → Development → Testing → Deployment → Publish",
+      "Roles at each phase: PMs, Architects, Developers, QA, DevOps, Tech Writers",
+      "Postman capabilities mapped to each phase",
+      "API Catalog: the city's central registry with governance and security rules",
+      "Insights: live traffic map showing active, unknown, and interacting services",
+      "Account Discovery & Control: detect and manage Postman usage across the organization",
+    ],
+    v12Addition: "System Environments (org-wide deployment stages), hourly-updating Reports, Account Discovery & Control GA.",
+    activity: null,
+    painPointThreaded: null,
+    updateTrigger: "When Postman adds governance features or changes lifecycle positioning.",
+  },
+  {
+    id: "M12",
+    name: "Wrap-Up & Bridge to P4P",
+    sensitivity: "low",
+    fieldGuideLayers: ["Quick Translations"],
+    v11Slides: "N/A",
+    v12Slides: "N/A",
+    featuresReferenced: [],
+    summary: "Recap, Q&A, connecting the bootcamp to ongoing learning through Postman for Postmanauts.",
+    keyElements: [
+      "Quick Translations: rapid-fire reference card mapping city metaphors to technical terms",
+      "'What to do next': how to stay current with Postman for Postmanauts",
+      "Resources: Field Guide, Postman Learning Center, internal Slack channels",
+      "Feedback collection",
+    ],
+    v12Addition: null,
+    activity: null,
+    painPointThreaded: null,
+    updateTrigger: "When Postman for Postmanauts program changes or new learning resources are available.",
+  },
+];
+
+const P4P_SESSIONS = [
+  { name: "Intro to Postman: Exploring the Tool", duration: "~60 min", audience: "Anyone who wants a tour of core workflows and the interface", description: "A guided exploration of Postman's interface, core workflows, and the foundational capabilities that make it indispensable for API collaboration.", category: "core" },
+  { name: "Why Do Customers Use Postman? (The Four Pain Points)", duration: "~60 min", audience: "GTM, customer-facing roles", description: "A deep dive into the key challenges Postman solves — Discovery, Testing, Design, and Documentation — linking real-world developer frustrations to Postman's value proposition.", category: "core" },
+  { name: "What's New In V12", duration: "~45–60 min", audience: "Anyone wanting to understand the V12 platform shift", description: "All things V12, from Agent Mode to the API Catalog, to Git Integrations, CLI expansion, MCP, and the shift to an AI-native development platform.", category: "core" },
+  { name: "30 Minute Pit Stop", duration: "30 min", audience: "Anyone with quick questions", description: "For when you just have a few quick product questions or need help translating a technical concept into high-impact outcomes for you, your team, and our customers.", category: "flexible" },
+  { name: "Specific Features", duration: "~45 min", audience: "Anyone wanting depth on a feature relevant to their role", description: "A tailored walkthrough of specific Postman features most relevant to your role, focusing on practical use and impact. Your choice of feature!", category: "flexible" },
+  { name: "Deeper Dive: Advanced Features", duration: "~60 min", audience: "Anyone ready for complex features", description: "A hands-on session exploring Postman's advanced functionality, connecting complex features to strategic and customer-facing outcomes.", category: "advanced" },
+  { name: "Understanding APIs", duration: "~45–60 min", audience: "Anyone building foundational API literacy", description: "A conversational session to build understanding of what APIs are, how they work, and why they matter in the modern world. Uses the City Metaphor framework.", category: "core" },
+  { name: "MCP & AI Agents", duration: "~45 min", audience: "GTM and Engineering teams", description: "What MCP is, how Postman uses it, CLI Generator for AI-ready APIs, and why customers care. The fastest-moving area of the product.", category: "advanced", isNew: true },
+  { name: "Postman CLI & Developer Workflow", duration: "~45 min", audience: "Solutions, Support, Engineering", description: "How Postman fits into CI/CD and the developer inner loop. Covers Flows CLI, performance testing, mock servers, SDK generation, and multi-protocol support.", category: "advanced", isNew: true },
+  { name: "Security & Governance in Postman", duration: "~45 min", audience: "Customer-facing teams, Enterprise accounts", description: "Secrets Resolution, Shared Vault, Account Discovery & Control, EU data residency. Security as a major product pillar.", category: "advanced", isNew: true },
+];
+
+const ANNOUNCEMENT_CADENCE = [
+  { timing: "Weekly (Fridays)", what: "'This Week in Postman' digest", where: "Company-wide Slack", who: "All employees", icon: "\ud83d\udcf0" },
+  { timing: "On major releases", what: "Targeted session promo", where: "Relevant team channels + all-company", who: "All employees with role callouts", icon: "\ud83d\udd14" },
+  { timing: "Monthly (1st Monday)", what: "P4P Menu Refresh", where: "All-company channel + email", who: "All employees", icon: "\ud83d\udccb" },
+  { timing: "Post-bootcamp", what: "Personal follow-up", where: "DM or follow-up channel", who: "New hire cohorts", icon: "\ud83c\udf93" },
+];
+
+const WORKFLOW_STEPS = [
+  { label: "#product-updates", detail: "Postman ships daily/weekly releases. Updates posted to Slack with stage, plan, demos.", color: "#FF6C37" },
+  { label: "Cowork Weekly Digest", detail: "Every Monday 8am — reads Slack, categorizes updates, drafts Friday announcement, flags bootcamp modules.", color: "#D97706" },
+  { label: "Marcus Reviews", detail: "Monday — adjusts digest, plans special sessions, decides if catalog needs new options.", color: "#7C3AED" },
+  { label: "Friday Announcement", detail: "'This Week in Postman' posted company-wide. Drives awareness and P4P bookings.", color: "#2563EB" },
+  { label: "P4P Sessions", detail: "Marcus delivers sessions with current content, fed by the weekly digest cycle.", color: "#059669" },
+  { label: "Monthly Refresh", detail: "1st Monday — add/retire session types, post updated catalog company-wide.", color: "#DC2626" },
+];
+
+const RECENT_PRODUCT_UPDATES = [
+  { date: "Apr 8", feature: "CLI Generator", description: "Generate a CLI for your APIs in one click — usable by AI agents and humans.", plans: "Team, Enterprise", modules: ["M08", "M09"] },
+  { date: "Apr 7", feature: "Publisher Self-Serve Verification", description: "Simplified to just domain ownership verification (DNS record or Run in Postman button).", plans: "All plans", modules: ["M11"] },
+  { date: "Apr 7", feature: "Secrets Resolution & Shared Vault", description: "Secrets as first-class concept. Just-in-time resolution, never stored in plain text. Shared Vault for teams.", plans: "All plans", modules: ["M05", "M09", "M10"] },
+  { date: "Apr 3", feature: "Hourly Reports + Sankey Charts", description: "Reports now update every hour (was monthly). New Sankey visualizations for Partner Analytics.", plans: "Enterprise", modules: ["M11"] },
+  { date: "Apr 1", feature: "SDK Generator: PHP, Go, C#", description: "SDK generation now supports 6 languages total.", plans: "Enterprise", modules: ["M09"] },
+  { date: "Mar 31", feature: "Agent Mode: Knowledge Base Optimization", description: "20% token reduction, versioned knowledge base, scalable to CLI and Background Agent.", plans: "All plans", modules: ["M08"] },
+  { date: "Mar 30", feature: "SpecHub 2-Way Sync (OAS 3.1 + 2.0)", description: "Full bidirectional sync between Specification and Collection.", plans: "All plans", modules: ["M04", "M09"] },
+  { date: "Mar 27", feature: "Command Palette", description: "cmd+shift+P from anywhere. Type > in search. 'Ask AI' for complex workflows.", plans: "All plans", modules: ["M07", "M09"] },
+  { date: "Mar 20", feature: "Private API Network Search in MCP", description: "AI agents can securely access trusted internal APIs through Postman MCP.", plans: "Enterprise", modules: ["M08", "M11"] },
+  { date: "Mar 10", feature: "Improved MCP Catalog UX", description: "Cross-workspace MCP generation, 1-click add, team-level publishing, zip downloads.", plans: "All plans", modules: ["M08"] },
+  { date: "Mar 2", feature: "Native Git for Flows", description: "Build Flows in your IDE, manage in local Git repos, push to Postman Cloud.", plans: "All plans", modules: ["M06"] },
+  { date: "Mar 1", feature: "Postman CLI v1.31.3", description: "Private API monitoring, performance testing, mock servers, SDK generation, Flows CLI, multi-protocol.", plans: "All plans", modules: ["M07", "M09"] },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// UI COMPONENTS
+// ═══════════════════════════════════════════════════════════════
+
+const SENSITIVITY_CONFIG = {
+  low: { label: "Low", color: "#059669", bg: "#ECFDF5", icon: "\u25cf" },
+  medium: { label: "Medium", color: "#D97706", bg: "#FFFBEB", icon: "\u25cf" },
+  high: { label: "High", color: "#DC2626", bg: "#FEF2F2", icon: "\u25cf" },
+};
+
+const CATEGORY_CONFIG = {
+  core: { label: "Core", color: "#2563EB", bg: "#EFF6FF" },
+  flexible: { label: "Flexible", color: "#7C3AED", bg: "#F5F3FF" },
+  advanced: { label: "Advanced", color: "#D97706", bg: "#FFFBEB" },
+};
+
+const THEMES = {
+  light: {
+    pageBg: "#FAF8F5",
+    sidebarBg: "#FFFFFF",
+    cardBg: "#FFFFFF",
+    border: "#E5E1D8",
+    textPrimary: "#1a1a1a",
+    textSecondary: "#4B5563",
+    textTertiary: "#6B7280",
+    textMuted: "#9CA3AF",
+    textFooter: "#78716C",
+    accent: "#92400E",
+    navActiveBg: "#F5F0E8",
+    navCountActiveBg: "#FEF3C7",
+    navCountActiveColor: "#92400E",
+    navCountBg: "#F3F4F6",
+    inputBg: "#FFFFFF",
+    featureTagBg: "#F9F5EF",
+    featureTagColor: "#92400E",
+    featureTagBorder: "#E5E1D8",
+    detailBoxBg: "#FAF8F5",
+    barTrackBg: "#F3F0EA",
+    automationBg: "#ECFDF5",
+    filterActiveBg: "#1a1a1a",
+    filterActiveColor: "#FFFFFF",
+    filterBg: "#FFFFFF",
+    filterColor: "#6B7280",
+    updateRowBorder: "#F3F0EA",
+    v12Bg: "#FEF3C7",
+    v12Color: "#92400E",
+    v12Border: "#D97706",
+    activityBg: "#EFF6FF",
+    activityColor: "#1E40AF",
+    activityBorder: "#2563EB",
+    painBg: "#FEF2F2",
+    painColor: "#991B1B",
+    painBorder: "#DC2626",
+    scrollThumb: "#D1CBC0",
+    hoverShadow: "0 4px 12px rgba(0,0,0,0.06)",
+  },
+  dark: {
+    pageBg: "#111113",
+    sidebarBg: "#1a1a1e",
+    cardBg: "#1e1e22",
+    border: "#2e2e34",
+    textPrimary: "#e8e6e3",
+    textSecondary: "#b0aead",
+    textTertiary: "#8a8886",
+    textMuted: "#6b6966",
+    textFooter: "#6b6966",
+    accent: "#FF6C37",
+    navActiveBg: "#2a2a30",
+    navCountActiveBg: "#3a2a1a",
+    navCountActiveColor: "#FF6C37",
+    navCountBg: "#2a2a30",
+    inputBg: "#1e1e22",
+    featureTagBg: "#2a2520",
+    featureTagColor: "#FF9A6C",
+    featureTagBorder: "#3a3530",
+    detailBoxBg: "#1a1a1e",
+    barTrackBg: "#2a2a30",
+    automationBg: "#0a2a1a",
+    filterActiveBg: "#e8e6e3",
+    filterActiveColor: "#111113",
+    filterBg: "#1e1e22",
+    filterColor: "#8a8886",
+    updateRowBorder: "#2a2a30",
+    v12Bg: "#2a2510",
+    v12Color: "#FCD34D",
+    v12Border: "#D97706",
+    activityBg: "#0a1a30",
+    activityColor: "#93C5FD",
+    activityBorder: "#2563EB",
+    painBg: "#2a1010",
+    painColor: "#FCA5A5",
+    painBorder: "#DC2626",
+    scrollThumb: "#4a4a50",
+    hoverShadow: "0 4px 12px rgba(0,0,0,0.3)",
+  }
+};
+
+function ThemeToggle({ darkMode, onToggle }) {
+  return (
+    <button
+      onClick={onToggle}
+      style={{
+        width: 56,
+        height: 28,
+        borderRadius: 14,
+        border: "none",
+        background: darkMode ? "#2e2e34" : "#E5E1D8",
+        cursor: "pointer",
+        padding: 2,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: darkMode ? "flex-end" : "flex-start",
+        transition: "all 0.3s ease",
+        position: "relative",
+      }}
+      title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      <span style={{
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+        background: darkMode ? "#1a1a1e" : "#FFFFFF",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 12,
+        transition: "all 0.3s ease",
+        color: darkMode ? "#FF6C37" : "#92400E",
+      }}>
+        {darkMode ? "☾" : "☀"}
+      </span>
+    </button>
+  );
+}
+
+function Badge({ text, color, bg }) {
+  return (
+    <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, fontSize: 11, fontWeight: 600, letterSpacing: "0.03em", color, background: bg, whiteSpace: "nowrap" }}>
+      {text}
+    </span>
+  );
+}
+
+function SensitivityBadge({ level }) {
+  const c = SENSITIVITY_CONFIG[level];
+  return <Badge text={c.icon + " " + c.label + " sensitivity"} color={c.color} bg={c.bg} />;
+}
+
+function NavItem({ label, active, onClick, count, t }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%",
+        padding: "10px 16px", border: "none", borderRadius: 8, cursor: "pointer", textAlign: "left",
+        background: active ? t.navActiveBg : "transparent",
+        color: active ? t.textPrimary : t.textTertiary,
+        fontWeight: active ? 600 : 400, fontSize: 14, fontFamily: "inherit",
+        transition: "all 0.15s ease",
+      }}
+    >
+      <span>{label}</span>
+      {count !== undefined && (
+        <span style={{ fontSize: 11, fontWeight: 500, color: active ? t.navCountActiveColor : t.textMuted, background: active ? t.navCountActiveBg : t.navCountBg, padding: "1px 8px", borderRadius: 999 }}>
+          {count}
+        </span>
+      )}
+    </button>
+  );
+}
+
+function ModuleCard({ module, onClick, t }) {
+  const s = SENSITIVITY_CONFIG[module.sensitivity];
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 24,
+        textAlign: "left", cursor: "pointer", transition: "all 0.2s ease", width: "100%",
+        borderLeft: "4px solid " + s.color, fontFamily: "inherit",
+      }}
+      onMouseEnter={function(e) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = t.hoverShadow; }}
+      onMouseLeave={function(e) { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+        <span style={{ fontSize: 12, fontWeight: 700, color: t.textMuted, letterSpacing: "0.05em" }}>{module.id}</span>
+        <SensitivityBadge level={module.sensitivity} />
+      </div>
+      <h3 style={{ fontSize: 17, fontWeight: 600, color: t.textPrimary, marginBottom: 8, lineHeight: 1.3 }}>{module.name}</h3>
+      <p style={{ fontSize: 13, color: t.textTertiary, lineHeight: 1.55, margin: 0 }}>{module.summary.slice(0, 120)}...</p>
+      {module.featuresReferenced.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 12 }}>
+          {module.featuresReferenced.slice(0, 3).map(function(f, i) {
+            return <span key={i} style={{ fontSize: 10, padding: "2px 8px", borderRadius: 4, background: t.featureTagBg, color: t.featureTagColor, fontWeight: 500 }}>{f}</span>;
+          })}
+          {module.featuresReferenced.length > 3 && (
+            <span style={{ fontSize: 10, padding: "2px 8px", color: t.textMuted }}>+{module.featuresReferenced.length - 3} more</span>
+          )}
+        </div>
+      )}
+    </button>
+  );
+}
+
+function Section({ title, children, t }) {
+  return (
+    <div style={{ marginBottom: 24 }}>
+      <h4 style={{ fontSize: 12, fontWeight: 700, color: t.textMuted, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>{title}</h4>
+      {children}
+    </div>
+  );
+}
+
+function ModuleDetail({ module, onBack, t }) {
+  const s = SENSITIVITY_CONFIG[module.sensitivity];
+  return (
+    <div style={{ animation: "fadeIn 0.2s ease" }}>
+      <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: t.accent, fontSize: 13, fontWeight: 500, marginBottom: 20, fontFamily: "inherit", padding: 0 }}>
+        \u2190 Back to all modules
+      </button>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: s.color, letterSpacing: "0.05em" }}>{module.id}</span>
+        <SensitivityBadge level={module.sensitivity} />
+      </div>
+      <h2 style={{ fontSize: 28, fontWeight: 700, color: t.textPrimary, marginBottom: 16, lineHeight: 1.2 }}>{module.name}</h2>
+      <p style={{ fontSize: 15, color: t.textSecondary, lineHeight: 1.7, marginBottom: 28 }}>{module.summary}</p>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 28 }}>
+        {[
+          { label: "V11 Slides", value: module.v11Slides },
+          { label: "V12 Slides", value: module.v12Slides },
+          { label: "Field Guide", value: module.fieldGuideLayers.length > 0 ? module.fieldGuideLayers.join(", ") : "N/A" },
+        ].map(function(item, i) {
+          return (
+            <div key={i} style={{ background: t.detailBoxBg, borderRadius: 8, padding: "12px 16px" }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: t.textMuted, letterSpacing: "0.05em", marginBottom: 4 }}>{item.label}</div>
+              <div style={{ fontSize: 13, color: t.textPrimary, fontWeight: 500 }}>{item.value}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {module.keyElements.length > 0 && (
+        <Section title="Key Elements" t={t}>
+          <ul style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 8 }}>
+            {module.keyElements.map(function(el, i) {
+              return <li key={i} style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.6 }}>{el}</li>;
+            })}
+          </ul>
+        </Section>
+      )}
+
+      {module.v12Addition && (
+        <Section title="V12 Addition" t={t}>
+          <div style={{ background: t.v12Bg, borderRadius: 8, padding: 16, fontSize: 14, color: t.v12Color, lineHeight: 1.6, borderLeft: "3px solid " + t.v12Border }}>
+            {module.v12Addition}
+          </div>
+        </Section>
+      )}
+
+      {module.activity && (
+        <Section title="Activity" t={t}>
+          <div style={{ background: t.activityBg, borderRadius: 8, padding: 16, fontSize: 14, color: t.activityColor, lineHeight: 1.6, borderLeft: "3px solid " + t.activityBorder }}>
+            {module.activity}
+          </div>
+        </Section>
+      )}
+
+      {module.painPointThreaded && (
+        <Section title="Pain Point Threaded" t={t}>
+          <div style={{ background: t.painBg, borderRadius: 8, padding: 16, fontSize: 14, color: t.painColor, lineHeight: 1.6, borderLeft: "3px solid " + t.painBorder }}>
+            {module.painPointThreaded}
+          </div>
+        </Section>
+      )}
+
+      {module.featuresReferenced.length > 0 && (
+        <Section title="Postman Features Referenced" t={t}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+            {module.featuresReferenced.map(function(f, i) {
+              return <span key={i} style={{ fontSize: 12, padding: "4px 12px", borderRadius: 6, background: t.featureTagBg, color: t.featureTagColor, fontWeight: 500, border: "1px solid " + t.featureTagBorder }}>{f}</span>;
+            })}
+          </div>
+        </Section>
+      )}
+
+      <Section title="When to Update" t={t}>
+        <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.6, margin: 0 }}>{module.updateTrigger}</p>
+      </Section>
+    </div>
+  );
+}
+
+function SessionCard({ session, t }) {
+  const cat = CATEGORY_CONFIG[session.category];
+  return (
+    <div style={{
+      background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 20,
+      transition: "all 0.2s ease", position: "relative", overflow: "hidden",
+    }}>
+      {session.isNew && (
+        <span style={{ position: "absolute", top: 12, right: 12, fontSize: 10, fontWeight: 700, color: "#FFFFFF", background: "#059669", padding: "2px 8px", borderRadius: 4, letterSpacing: "0.05em" }}>NEW</span>
+      )}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+        <Badge text={cat.label} color={cat.color} bg={cat.bg} />
+        <span style={{ fontSize: 12, color: t.textMuted }}>{session.duration}</span>
+      </div>
+      <h3 style={{ fontSize: 16, fontWeight: 600, color: t.textPrimary, marginBottom: 6, lineHeight: 1.3 }}>{session.name}</h3>
+      <p style={{ fontSize: 13, color: t.textTertiary, lineHeight: 1.55, margin: 0, marginBottom: 8 }}>{session.description}</p>
+      <p style={{ fontSize: 11, color: t.textMuted, margin: 0, fontWeight: 500 }}>Audience: {session.audience}</p>
+    </div>
+  );
+}
+
+function WorkflowStep({ step, index, total, t }) {
+  return (
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+        <div style={{ width: 32, height: 32, borderRadius: 999, background: step.color, color: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700 }}>
+          {index + 1}
+        </div>
+        {index < total - 1 && <div style={{ width: 2, height: 40, background: t.border, marginTop: 4 }} />}
+      </div>
+      <div style={{ paddingBottom: index < total - 1 ? 20 : 0 }}>
+        <h4 style={{ fontSize: 15, fontWeight: 600, color: t.textPrimary, marginBottom: 4 }}>{step.label}</h4>
+        <p style={{ fontSize: 13, color: t.textTertiary, lineHeight: 1.55, margin: 0 }}>{step.detail}</p>
+      </div>
+    </div>
+  );
+}
+
+function UpdateRow({ update, t }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "60px 1fr auto", gap: 12, padding: "14px 0", borderBottom: "1px solid " + t.updateRowBorder, alignItems: "start" }}>
+      <span style={{ fontSize: 12, color: t.textMuted, fontWeight: 500, paddingTop: 2 }}>{update.date}</span>
+      <div>
+        <div style={{ fontSize: 14, fontWeight: 600, color: t.textPrimary, marginBottom: 2 }}>{update.feature}</div>
+        <div style={{ fontSize: 12, color: t.textTertiary, lineHeight: 1.5 }}>{update.description}</div>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "flex-end" }}>
+        {update.modules.map(function(m, i) {
+          const mod = BOOTCAMP_MODULES.find(function(mod) { return mod.id === m; });
+          const s = mod ? SENSITIVITY_CONFIG[mod.sensitivity] : SENSITIVITY_CONFIG.low;
+          return <span key={i} style={{ fontSize: 10, padding: "2px 6px", borderRadius: 4, background: s.bg, color: s.color, fontWeight: 600 }}>{m}</span>;
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN APP
+// ═══════════════════════════════════════════════════════════════
+
+const PAGES = [
+  { id: "overview", label: "Overview" },
+  { id: "modules", label: "Bootcamp Modules", count: BOOTCAMP_MODULES.length },
+  { id: "p4p", label: "Postman for Postmanauts", count: P4P_SESSIONS.length },
+  { id: "workflow", label: "Update Workflow" },
+  { id: "updates", label: "Recent Product Updates", count: RECENT_PRODUCT_UPDATES.length },
+];
+
+function App() {
+  const [page, setPage] = useState("overview");
+  const [selectedModule, setSelectedModule] = useState(null);
+  const [sensitivityFilter, setSensitivityFilter] = useState("all");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const t = darkMode ? THEMES.dark : THEMES.light;
+
+  useEffect(function() {
+    document.body.style.background = t.pageBg;
+    const styleEl = document.getElementById("theme-scrollbar-styles");
+    styleEl.innerHTML = `::-webkit-scrollbar-thumb { background: ${t.scrollThumb}; border-radius: 3px; }`;
+  }, [darkMode]);
+
+  const filteredModules = useMemo(function() {
+    if (sensitivityFilter === "all") return BOOTCAMP_MODULES;
+    return BOOTCAMP_MODULES.filter(function(m) { return m.sensitivity === sensitivityFilter; });
+  }, [sensitivityFilter]);
+
+  const stats = useMemo(function() {
+    return {
+      highModules: BOOTCAMP_MODULES.filter(function(m) { return m.sensitivity === "high"; }).length,
+      medModules: BOOTCAMP_MODULES.filter(function(m) { return m.sensitivity === "medium"; }).length,
+      lowModules: BOOTCAMP_MODULES.filter(function(m) { return m.sensitivity === "low"; }).length,
+      totalSessions: P4P_SESSIONS.length,
+      newSessions: P4P_SESSIONS.filter(function(s) { return s.isNew; }).length,
+      recentUpdates: RECENT_PRODUCT_UPDATES.length,
+    };
+  }, []);
+
+  return (
+    <div style={{ display: "flex", minHeight: "100vh", background: t.pageBg, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+
+      {/* Sidebar */}
+      <aside style={{
+        width: sidebarOpen ? 260 : 0, overflow: "hidden", background: t.sidebarBg, borderRight: "1px solid " + t.border,
+        padding: sidebarOpen ? "28px 16px" : 0, flexShrink: 0, transition: "all 0.2s ease",
+        display: "flex", flexDirection: "column",
+      }}>
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: t.accent, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>Postman</div>
+          <h1 style={{ fontSize: 20, fontWeight: 700, color: t.textPrimary, margin: 0, lineHeight: 1.2 }}>{SITE.title}</h1>
+          <p style={{ fontSize: 12, color: t.textMuted, margin: "4px 0 0", lineHeight: 1.4 }}>{SITE.subtitle}</p>
+        </div>
+        <nav style={{ display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
+          {PAGES.map(function(p) {
+            return <NavItem key={p.id} label={p.label} count={p.count} active={page === p.id} onClick={function() { setPage(p.id); setSelectedModule(null); }} t={t} />;
+          })}
+        </nav>
+        <div style={{ marginTop: "auto", paddingTop: 20, borderTop: "1px solid " + t.border, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ fontSize: 11, color: t.textFooter, lineHeight: 1.5, flex: 1, marginRight: 12 }}>
+            Content populated from markdown playbooks. Edit the data layer to update.
+          </div>
+          <ThemeToggle darkMode={darkMode} onToggle={function() { setDarkMode(!darkMode); }} />
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main style={{ flex: 1, padding: "32px 40px", maxWidth: 960, overflow: "auto" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
+          <button
+            onClick={function() { setSidebarOpen(!sidebarOpen); }}
+            style={{ background: "none", border: "1px solid " + t.border, borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontSize: 13, color: t.textTertiary, fontFamily: "inherit" }}
+          >
+            {sidebarOpen ? "\u2190 Hide nav" : "\u2192 Show nav"}
+          </button>
+          {!sidebarOpen && <ThemeToggle darkMode={darkMode} onToggle={function() { setDarkMode(!darkMode); }} />}
+        </div>
+
+        {/* OVERVIEW */}
+        {page === "overview" && (
+          <div style={{ animation: "fadeIn 0.2s ease" }}>
+            <h2 style={{ fontSize: 32, fontWeight: 700, color: t.textPrimary, marginBottom: 8, lineHeight: 1.1 }}>
+              Keeping Postmanauts<br />sharp on what matters.
+            </h2>
+            <p style={{ fontSize: 15, color: t.textTertiary, lineHeight: 1.7, marginBottom: 36, maxWidth: 560 }}>
+              {SITE.tagline} Two programs, one system: the Fundamentals Bootcamp for new hires, and Postman for Postmanauts for ongoing upskilling. Both kept current automatically.
+            </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: 36 }}>
+              {[
+                { label: "Bootcamp Modules", value: BOOTCAMP_MODULES.length, sub: stats.highModules + " high sensitivity", color: "#DC2626" },
+                { label: "P4P Sessions", value: stats.totalSessions, sub: stats.newSessions + " new recommended", color: "#059669" },
+                { label: "Recent Updates", value: stats.recentUpdates, sub: "from #product-updates", color: "#D97706" },
+              ].map(function(stat, i) {
+                return (
+                  <div key={i} style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 20 }}>
+                    <div style={{ fontSize: 36, fontWeight: 700, color: stat.color, lineHeight: 1 }}>{stat.value}</div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: t.textPrimary, marginTop: 8 }}>{stat.label}</div>
+                    <div style={{ fontSize: 12, color: t.textMuted, marginTop: 2 }}>{stat.sub}</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+              <div style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 24 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: t.textPrimary, marginBottom: 16 }}>Module Sensitivity Distribution</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {["high", "medium", "low"].map(function(level) {
+                    var count = BOOTCAMP_MODULES.filter(function(m) { return m.sensitivity === level; }).length;
+                    var pct = (count / BOOTCAMP_MODULES.length) * 100;
+                    var c = SENSITIVITY_CONFIG[level];
+                    return (
+                      <div key={level}>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                          <span style={{ fontSize: 13, fontWeight: 500, color: t.textSecondary }}>{c.label} — updated {level === "high" ? "weekly" : level === "medium" ? "bi-weekly" : "monthly"}</span>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: c.color }}>{count}</span>
+                        </div>
+                        <div style={{ height: 6, background: t.barTrackBg, borderRadius: 3, overflow: "hidden" }}>
+                          <div style={{ height: "100%", width: pct + "%", background: c.color, borderRadius: 3, transition: "width 0.5s ease" }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 24 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: t.textPrimary, marginBottom: 16 }}>Automated Systems</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {[
+                    { name: "Bootcamp Changelog Monitor", schedule: "Mondays 9am", status: "Active" },
+                    { name: "P4P Weekly Product Digest", schedule: "Mondays 8am", status: "Active" },
+                  ].map(function(task, i) {
+                    return (
+                      <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", background: t.automationBg, borderRadius: 8 }}>
+                        <div>
+                          <div style={{ fontSize: 13, fontWeight: 600, color: t.textPrimary }}>{task.name}</div>
+                          <div style={{ fontSize: 11, color: t.textTertiary }}>{task.schedule}</div>
+                        </div>
+                        <Badge text={task.status} color="#059669" bg="#D1FAE5" />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* BOOTCAMP MODULES */}
+        {page === "modules" && (
+          <div style={{ animation: "fadeIn 0.2s ease" }}>
+            {selectedModule ? (
+              <ModuleDetail module={selectedModule} onBack={function() { setSelectedModule(null); }} t={t} />
+            ) : (
+              <div>
+                <h2 style={{ fontSize: 28, fontWeight: 700, color: t.textPrimary, marginBottom: 8 }}>Bootcamp Modules</h2>
+                <p style={{ fontSize: 14, color: t.textTertiary, lineHeight: 1.6, marginBottom: 24, maxWidth: 560 }}>
+                  12 topic-based modules, each self-contained with slides, speaker notes, activities, and tracked feature dependencies. Click any module to explore.
+                </p>
+                <div style={{ display: "flex", gap: 6, marginBottom: 24 }}>
+                  {[
+                    { key: "all", label: "All" },
+                    { key: "high", label: "High sensitivity" },
+                    { key: "medium", label: "Medium" },
+                    { key: "low", label: "Low" },
+                  ].map(function(f) {
+                    return (
+                      <button
+                        key={f.key}
+                        onClick={function() { setSensitivityFilter(f.key); }}
+                        style={{
+                          padding: "6px 14px", borderRadius: 999, border: "1px solid " + t.border, cursor: "pointer",
+                          fontSize: 12, fontWeight: 500, fontFamily: "inherit",
+                          background: sensitivityFilter === f.key ? t.filterActiveBg : t.filterBg,
+                          color: sensitivityFilter === f.key ? t.filterActiveColor : t.filterColor,
+                        }}
+                      >
+                        {f.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 14 }}>
+                  {filteredModules.map(function(m) {
+                    return <ModuleCard key={m.id} module={m} onClick={function() { setSelectedModule(m); }} t={t} />;
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* P4P SESSIONS */}
+        {page === "p4p" && (
+          <div style={{ animation: "fadeIn 0.2s ease" }}>
+            <h2 style={{ fontSize: 28, fontWeight: 700, color: t.textPrimary, marginBottom: 8 }}>Postman for Postmanauts</h2>
+            <p style={{ fontSize: 14, color: t.textTertiary, lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
+              Just-in-time upskilling sessions employees can book anytime. The bootcamp gives new hires a foundation — P4P keeps everyone sharp.
+            </p>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: t.textPrimary, marginBottom: 16 }}>Session Catalog</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 14, marginBottom: 40 }}>
+              {P4P_SESSIONS.map(function(s, i) { return <SessionCard key={i} session={s} t={t} />; })}
+            </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: t.textPrimary, marginBottom: 16 }}>Announcement Cadence</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {ANNOUNCEMENT_CADENCE.map(function(a, i) {
+                return (
+                  <div key={i} style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 20 }}>
+                    <div style={{ fontSize: 24, marginBottom: 8 }}>{a.icon}</div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: t.textPrimary, marginBottom: 4 }}>{a.timing}</div>
+                    <div style={{ fontSize: 13, color: t.textSecondary, marginBottom: 6 }}>{a.what}</div>
+                    <div style={{ fontSize: 11, color: t.textMuted }}>{a.where} · {a.who}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* WORKFLOW */}
+        {page === "workflow" && (
+          <div style={{ animation: "fadeIn 0.2s ease" }}>
+            <h2 style={{ fontSize: 28, fontWeight: 700, color: t.textPrimary, marginBottom: 8 }}>Update Workflow</h2>
+            <p style={{ fontSize: 14, color: t.textTertiary, lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
+              How product changes flow through the system — from Slack to session content, automatically monitored and flagged.
+            </p>
+
+            <div style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 32, marginBottom: 32 }}>
+              {WORKFLOW_STEPS.map(function(step, i) {
+                return <WorkflowStep key={i} step={step} index={i} total={WORKFLOW_STEPS.length} t={t} />;
+              })}
+            </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: t.textPrimary, marginBottom: 16 }}>Audit Cadence</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+              {[
+                { level: "high", freq: "Weekly", reason: "AI, Git, Platform modules change with nearly every release" },
+                { level: "medium", freq: "Bi-weekly", reason: "Design, Security, Dev Experience shift periodically" },
+                { level: "low", freq: "Monthly", reason: "Foundational concepts and facilitation rarely need updates" },
+              ].map(function(item, i) {
+                var c = SENSITIVITY_CONFIG[item.level];
+                return (
+                  <div key={i} style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: 20, borderTop: "3px solid " + c.color }}>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: c.color, marginBottom: 4 }}>{item.freq}</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: t.textPrimary, marginBottom: 6 }}>{c.label} Sensitivity</div>
+                    <div style={{ fontSize: 12, color: t.textTertiary, lineHeight: 1.5 }}>{item.reason}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* RECENT UPDATES */}
+        {page === "updates" && (
+          <div style={{ animation: "fadeIn 0.2s ease" }}>
+            <h2 style={{ fontSize: 28, fontWeight: 700, color: t.textPrimary, marginBottom: 8 }}>Recent Product Updates</h2>
+            <p style={{ fontSize: 14, color: t.textTertiary, lineHeight: 1.6, marginBottom: 28, maxWidth: 560 }}>
+              From #product-updates in Slack. Each update is tagged with the bootcamp modules it affects.
+            </p>
+            <div style={{ background: t.cardBg, border: "1px solid " + t.border, borderRadius: 12, padding: "8px 24px" }}>
+              {RECENT_PRODUCT_UPDATES.map(function(u, i) { return <UpdateRow key={i} update={u} t={t} />; })}
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
