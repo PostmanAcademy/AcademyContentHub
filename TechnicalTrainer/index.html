@@ -223,7 +223,7 @@
     margin-left: 240px;
     flex: 1;
     padding: 32px 48px;
-    max-width: 960px;
+    max-width: 1400px;
   }
 
   .page { display: none; }
@@ -1547,13 +1547,20 @@
     margin-bottom: 18px;
   }
 
+  .digest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
   .digest-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 24px 28px;
-    margin-bottom: 20px;
+    padding: 22px 24px;
     transition: box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
   }
 
   .digest-item:hover { box-shadow: var(--shadow-md); }
@@ -1591,7 +1598,6 @@
     color: var(--text-secondary);
     line-height: 1.7;
     margin-bottom: 14px;
-    max-width: 640px;
   }
 
   .digest-item-footer {
@@ -1601,7 +1607,7 @@
     flex-wrap: wrap;
     padding-top: 14px;
     border-top: 1px solid var(--border-light);
-    margin-top: 4px;
+    margin-top: auto;
   }
 
   .digest-tag {
@@ -3053,7 +3059,8 @@ function renderDigest() {
   }
 
   document.getElementById("digest-items").innerHTML =
-    `<div class="digest-month-label">${monthLabel}</div>` +
+    `<div class="digest-month-label">${monthLabel}</div>
+     <div class="digest-grid">` +
     MONTHLY_DIGEST.map(d => `
     <div class="digest-item">
       <div class="digest-item-header">
@@ -3076,7 +3083,7 @@ function renderDigest() {
         ${d.author ? `<span class="digest-item-date">by ${d.author}</span>` : ''}
       </div>
     </div>
-  `).join("");
+  `).join("") + `</div>`;
 }
 
 function renderSessionGrid(filter = "all") {
