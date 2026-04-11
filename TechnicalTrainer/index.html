@@ -1754,7 +1754,6 @@
             <p><strong>How to update:</strong> This tab is read-only — it refreshes automatically when the weekly review task runs. To change what appears here, edit the digest data in <code>index.html</code> or re-run the review task.</p>
           </div>
         </details>
-        <div class="digest-summary" id="digest-summary"></div>
         <div id="digest-items"></div>
       </div>
 
@@ -3039,34 +3038,8 @@ function switchHomeTab(tab) {
 }
 
 function renderDigest() {
-  // Summary stats
-  const totalUpdates = MONTHLY_DIGEST.length;
-  const gaCount = MONTHLY_DIGEST.filter(d => d.stage === "GA").length;
-  const betaCount = MONTHLY_DIGEST.filter(d => d.stage === "Beta").length;
-  const allAffected = new Set();
-  MONTHLY_DIGEST.forEach(d => d.affectedModules.forEach(m => allAffected.add(m)));
-
   const now = new Date();
   const monthLabel = now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-
-  document.getElementById("digest-summary").innerHTML = `
-    <div class="digest-stat">
-      <div class="digest-stat-value">${totalUpdates}</div>
-      <div class="digest-stat-label">Updates shipped</div>
-    </div>
-    <div class="digest-stat">
-      <div class="digest-stat-value">${gaCount}</div>
-      <div class="digest-stat-label">Generally available</div>
-    </div>
-    <div class="digest-stat">
-      <div class="digest-stat-value">${betaCount}</div>
-      <div class="digest-stat-label">In beta</div>
-    </div>
-    <div class="digest-stat">
-      <div class="digest-stat-value">${allAffected.size}</div>
-      <div class="digest-stat-label">Modules touched</div>
-    </div>
-  `;
 
   // Digest items
   if (MONTHLY_DIGEST.length === 0) {
