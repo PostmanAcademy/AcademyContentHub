@@ -1751,7 +1751,7 @@
           <div class="explainer-body">
             <p>A rolling digest of recent Postman product changes.</p>
             <p><strong>Source:</strong> Each entry is pulled from the <strong>#product-updates</strong> Slack channel by the weekly <em>review-product-updates</em> Cowork task. The data lives in the <code>DIGEST_ITEMS</code> array inside this HTML file.</p>
-            <p><strong>How to update:</strong> This tab is read-only — it refreshes automatically when the weekly review task runs. To change what appears here, edit the digest data in <code>academy-hub.html</code> or re-run the review task.</p>
+            <p><strong>How to update:</strong> This tab is read-only — it refreshes automatically when the weekly review task runs. To change what appears here, edit the digest data in <code>index.html</code> or re-run the review task.</p>
           </div>
         </details>
         <div class="digest-summary" id="digest-summary"></div>
@@ -2190,7 +2190,7 @@ update_triggers:                     # What changes should flag this module
           <h2>Workspace Layout</h2>
           <p>Everything lives in your selected folder. The hub is a self-contained HTML file; the modules are individual markdown files; the skills run in Cowork and write to this same folder.</p>
           <pre><code>TechnicalTrainer/
-  academy-hub.html                        ← The hub UI (this file)
+  index.html                              ← The hub UI (this file)
 
   modules/
     SYSTEM.md                             ← Operations guide (source of this Settings page)
@@ -2250,7 +2250,7 @@ update_triggers:                     # What changes should flag this module
             <li><strong>Declare feature dependencies</strong> — The <code>postman_features</code> list connects your module to the monitoring system. Be specific.</li>
             <li><strong>Set change sensitivity</strong> — Determines how often this module gets checked after product releases.</li>
             <li><strong>Write update triggers</strong> — Plain-language descriptions of what kinds of product changes should flag this module for review.</li>
-            <li><strong>The hub will pick it up</strong> — Once the file exists with valid frontmatter, add it to the <code>CLASSES</code> data array in <code>academy-hub.html</code> and it will appear automatically.</li>
+            <li><strong>The hub will pick it up</strong> — Once the file exists with valid frontmatter, add it to the <code>CLASSES</code> data array in <code>index.html</code> and it will appear automatically.</li>
           </ol>
         </div>
 
