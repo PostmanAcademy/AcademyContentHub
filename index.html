@@ -2588,6 +2588,78 @@ let selectedModules = {}; // tracks selected module per class, e.g. { bootcamp: 
 const MONTHLY_DIGEST = [
   {
     id: "d1",
+    date: "Apr 20",
+    feature: "API Catalog Live in EU Region",
+    stage: "GA",
+    plans: "Enterprise",
+    summary: "The API Catalog is now fully functional in the EU region, including API Gateway import, Insights, Cluster Watcher, service discovery with GitHub integration, and event ingestion via Postman CLI, monitors, and collection runs. Agent Mode and API Catalog Manager RBAC are not yet available in the EU deployment.",
+    whyItMatters: "Relevant to M11 (API Catalog & Governance) as it expands the geographic availability of the catalog. Worth noting in the 'Security & Governance' P4P session since EU data residency is a frequent enterprise concern. No module content changes needed, but good awareness for enterprise-focused training conversations.",
+    affectedModules: ["M11"],
+    affectedSessions: ["Security & Governance", "What's New in V12"],
+    author: "Shrey Shah"
+  },
+  {
+    id: "d2",
+    date: "Apr 17",
+    feature: "Personal Workspace in Unified Analytics",
+    stage: "GA",
+    plans: "Enterprise",
+    summary: "Unified Analytics now includes personal workspace activity in its metrics. The Overview Page metrics — Active Workspaces, Top 5 workspaces by API requests sent, and Top 5 collections by API requests sent — now reflect personal workspace data, giving teams a more complete picture of overall workspace activity.",
+    whyItMatters: "Directly affects M11 (API Catalog, Insights & Governance) where we teach analytics and reporting. Previously, personal workspace activity was a blind spot — now the data is comprehensive. This strengthens the governance narrative: teams can see the full picture of how Postman is being used across the organization.",
+    affectedModules: ["M11"],
+    affectedSessions: ["What's New in V12", "Security & Governance"],
+    author: "Harikrishna Sunkari"
+  },
+  {
+    id: "d3",
+    date: "Apr 16",
+    feature: "Multiforking Collections",
+    stage: "GA",
+    plans: "All plans",
+    summary: "External developers can now fork multiple collections at once from a partner portal, along with pre-configured environments and mock servers. This replaces the previous one-by-one fork and manual environment variable copy-paste flow, significantly streamlining the onboarding experience for partner API consumers.",
+    whyItMatters: "Relevant to M10 (Collections, Workspaces, Forking) since forking is a core hands-on concept we teach. The multi-fork capability changes how we frame the partner/consumer experience. Also touches M06 (version control) tangentially since forking is part of the broader collaboration and versioning story.",
+    affectedModules: ["M10", "M06"],
+    affectedSessions: ["Intro to Postman", "What's New in V12"],
+    author: "Bryan Zhu"
+  },
+  {
+    id: "d4",
+    date: "Apr 16",
+    feature: "Postman Atlas — 600+ Public APIs on the API Network",
+    stage: "GA",
+    plans: "All plans",
+    summary: "Postman Atlas has launched high-quality, auto-maintained workspaces for 679+ of the world's most widely used public APIs, including GitHub, Slack, Anthropic, Jira, SendGrid, and ElevenLabs. Generated from developer docs and OpenAPI specs, these workspaces stay automatically up to date. Atlas also supports MCP servers and non-HTTP requests for agent-driven workflows.",
+    whyItMatters: "Big for M08 (AI & Agents) given the MCP server support and agent workflow angle. Also relevant to M09 (The Postman Platform) as it strengthens the 'source of truth for APIs' narrative. Worth highlighting in the 'MCP & AI Agents' P4P session since Atlas bridges human and AI agent API consumption.",
+    affectedModules: ["M08", "M09"],
+    affectedSessions: ["MCP & AI Agents", "What's New in V12", "Why Customers Use Postman"],
+    author: "Aris Villareal"
+  },
+  {
+    id: "d5",
+    date: "Apr 15",
+    feature: "Multi-Entity Sidebar (Custom Panels)",
+    stage: "Beta",
+    plans: "All plans",
+    summary: "Sidebar panels are now customizable and support multiple entity types side-by-side. Users can rename, create, and delete panels, drag-and-drop items between them, and mix entity types — for example, keeping environments next to collections in the same panel.",
+    whyItMatters: "Affects M10 (Collections, Workspaces, UI changes) since the sidebar is a core navigation element we demonstrate constantly. When this goes GA, we'll need to update any screenshots or walkthrough instructions that reference the sidebar layout. Still in Beta (Stage 2), so flag it but don't change module content yet.",
+    affectedModules: ["M10"],
+    affectedSessions: ["Intro to Postman", "What's New in V12"],
+    author: "Mike Bell"
+  },
+  {
+    id: "d6",
+    date: "Apr 14",
+    feature: "Monitor Published Reports",
+    stage: "Beta",
+    plans: "Solo, Team, Enterprise",
+    summary: "Users can now publish monitor reports and share them externally via a public, read-only URL — functioning like a lightweight status page. Published reports show success rates, recent execution history, failure insights, and request-level performance metrics without requiring workspace access. Enterprise plans get approval workflows for publish and edit actions.",
+    whyItMatters: "Relevant to M07 (Postman CLI & CI/CD) since monitors are part of the automation testing workflow. The public URL sharing is a new capability that extends monitors beyond internal use. Also touches M11 (Governance) with the enterprise approval workflows. Still Beta, so worth tracking but no module changes needed yet.",
+    affectedModules: ["M07", "M11"],
+    affectedSessions: ["Postman CLI & Developer Workflow", "What's New in V12"],
+    author: "Nikitha Achhini"
+  },
+  {
+    id: "d7",
     date: "Apr 8",
     feature: "CLI Generator",
     stage: "GA",
@@ -2599,7 +2671,7 @@ const MONTHLY_DIGEST = [
     author: "Sagiv Ofek"
   },
   {
-    id: "d2",
+    id: "d8",
     date: "Apr 7",
     feature: "Secrets Resolution & Shared Vault",
     stage: "Beta",
@@ -2611,7 +2683,7 @@ const MONTHLY_DIGEST = [
     author: "Hitesh Sharma"
   },
   {
-    id: "d3",
+    id: "d9",
     date: "Apr 7",
     feature: "Publisher Self-Serve Verification",
     stage: "GA",
@@ -2623,7 +2695,7 @@ const MONTHLY_DIGEST = [
     author: "Igor Syvets"
   },
   {
-    id: "d4",
+    id: "d10",
     date: "Apr 3",
     feature: "Reports — Hourly Updates",
     stage: "GA",
@@ -2635,7 +2707,7 @@ const MONTHLY_DIGEST = [
     author: "Ramji Enamuthu"
   },
   {
-    id: "d5",
+    id: "d11",
     date: "Apr 3",
     feature: "Postman API v1.38.0 — Workspaces Pagination, API Catalog & Specs Updates",
     stage: "GA",
