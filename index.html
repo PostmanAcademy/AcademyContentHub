@@ -1705,11 +1705,6 @@
 
     <div class="nav-section">
       <div class="nav-section-label">Programs</div>
-      <div class="nav-item" data-page="p4p" onclick="navigate('p4p')">
-        <span class="nav-icon">&#9733;</span>
-        P4P Sessions
-        <span class="nav-badge" id="p4p-count"></span>
-      </div>
     </div>
 
     <div class="nav-section">
@@ -1828,7 +1823,11 @@
 
       <!-- Settings tab nav -->
       <div class="settings-tabs">
-        <button class="settings-tab active" data-settings-tab="how-it-works" onclick="switchSettingsTab('how-it-works')">
+        <button class="settings-tab active" data-settings-tab="architecture" onclick="switchSettingsTab('architecture')">
+          <span class="tab-icon">&#9878;</span>
+          Architecture
+        </button>
+        <button class="settings-tab" data-settings-tab="how-it-works" onclick="switchSettingsTab('how-it-works')">
           <span class="tab-icon">&#9881;</span>
           How It Works
         </button>
@@ -1846,68 +1845,231 @@
         </button>
       </div>
 
+      <!-- TAB: Architecture -->
+      <div class="settings-tab-content active" id="stab-architecture">
+
+        <div class="settings-section" style="overflow-x:auto;">
+          <svg viewBox="0 0 820 520" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;max-width:820px;display:block;margin:0 auto;">
+            <title>Training Content Sync — System Architecture</title>
+            <style>
+              .a-t { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 700; fill: var(--text, #1a1a1a); }
+              .a-col { font-family: system-ui, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1.2px; fill: var(--text-tertiary, #9ca3af); text-transform: uppercase; }
+              .a-l { font-family: system-ui, sans-serif; font-size: 11.5px; font-weight: 600; fill: var(--text, #1a1a1a); }
+              .a-s { font-family: system-ui, sans-serif; font-size: 9.5px; fill: var(--text-secondary, #6b7280); }
+              .a-xs { font-family: system-ui, sans-serif; font-size: 8.5px; fill: var(--text-tertiary, #9ca3af); }
+              .bx { rx: 8; ry: 8; fill: var(--bg-card, #fff); stroke: var(--border, #e5e7eb); stroke-width: 1; }
+              .bx-blue { rx: 8; ry: 8; fill: var(--blue-bg, #eff6ff); stroke: var(--blue, #3b82f6); stroke-width: 1.5; }
+              .bx-orange { rx: 8; ry: 8; fill: var(--accent-light, #fff4ef); stroke: var(--accent, #ff6c37); stroke-width: 1.5; }
+              .bx-green { rx: 8; ry: 8; fill: var(--green-bg, #ecfdf5); stroke: var(--green, #10b981); stroke-width: 1.5; }
+              .bx-purple { rx: 8; ry: 8; fill: var(--purple-bg, #f5f3ff); stroke: var(--purple, #8b5cf6); stroke-width: 1.5; }
+              .bx-yellow { rx: 8; ry: 8; fill: var(--yellow-bg, #fffbeb); stroke: var(--yellow, #f59e0b); stroke-width: 1.5; }
+              .arr { stroke: var(--text-tertiary, #aaa); stroke-width: 1.2; fill: none; marker-end: url(#arh); }
+              .arr-accent { stroke: var(--accent, #ff6c37); stroke-width: 1.5; fill: none; marker-end: url(#arha); }
+              .arr-green { stroke: var(--green, #10b981); stroke-width: 1.2; fill: none; marker-end: url(#arhg); stroke-dasharray: 5,3; }
+            </style>
+            <defs>
+              <marker id="arh" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="none" stroke="var(--text-tertiary, #aaa)" stroke-width="1"/></marker>
+              <marker id="arha" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="none" stroke="var(--accent, #ff6c37)" stroke-width="1"/></marker>
+              <marker id="arhg" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="none" stroke="var(--green, #10b981)" stroke-width="1"/></marker>
+            </defs>
+
+            <!-- ═══ TITLE ═══ -->
+            <text x="410" y="28" text-anchor="middle" class="a-t">How the Training Content Sync Works</text>
+
+            <!-- ═══ COL 1: WHAT WE WATCH ═══ -->
+            <text x="90" y="62" text-anchor="middle" class="a-col">What We Watch</text>
+
+            <rect x="15" y="78" width="150" height="48" class="bx"/>
+            <text x="90" y="98" text-anchor="middle" class="a-l">#product-updates</text>
+            <text x="90" y="114" text-anchor="middle" class="a-s">Slack — what shipped</text>
+
+            <rect x="15" y="138" width="150" height="48" class="bx"/>
+            <text x="90" y="158" text-anchor="middle" class="a-l">Google Drive</text>
+            <text x="90" y="174" text-anchor="middle" class="a-s">Slides &amp; facilitator guides</text>
+
+            <rect x="15" y="198" width="150" height="48" class="bx" stroke-dasharray="4,3"/>
+            <text x="90" y="218" text-anchor="middle" class="a-l" style="fill:var(--text-tertiary,#9ca3af)">+ More channels</text>
+            <text x="90" y="234" text-anchor="middle" class="a-xs">Add to sources.yaml</text>
+
+            <!-- ═══ COL 2: WHAT WE KNOW ═══ -->
+            <text x="310" y="62" text-anchor="middle" class="a-col">What We Know</text>
+
+            <rect x="210" y="78" width="200" height="64" class="bx-blue"/>
+            <text x="310" y="100" text-anchor="middle" class="a-l">sources.yaml</text>
+            <text x="310" y="116" text-anchor="middle" class="a-s">Channels, programs, Drive docs</text>
+            <text x="310" y="130" text-anchor="middle" class="a-xs">Single config — add a source, done</text>
+
+            <rect x="210" y="154" width="200" height="64" class="bx-blue"/>
+            <text x="310" y="176" text-anchor="middle" class="a-l">Module .md files</text>
+            <text x="310" y="192" text-anchor="middle" class="a-s">bootcamp/ · 101/ · 201/</text>
+            <text x="310" y="206" text-anchor="middle" class="a-xs">Each declares which Postman features it teaches</text>
+
+            <!-- ═══ COL 3: WHAT RUNS ═══ -->
+            <text x="310" y="254" text-anchor="middle" class="a-col">What Runs</text>
+
+            <rect x="210" y="270" width="200" height="52" class="bx-orange"/>
+            <text x="310" y="292" text-anchor="middle" class="a-l">review-product-updates</text>
+            <text x="310" y="308" text-anchor="middle" class="a-s">Scans Slack → maps to modules → checks Drive</text>
+
+            <rect x="210" y="334" width="200" height="36" class="bx-yellow"/>
+            <text x="310" y="357" text-anchor="middle" class="a-l">apply-approved-updates</text>
+
+            <rect x="210" y="382" width="200" height="36" class="bx-yellow"/>
+            <text x="310" y="405" text-anchor="middle" class="a-l">scaffold-program</text>
+
+            <!-- ═══ COL 4: WHAT YOU SEE ═══ -->
+            <text x="620" y="62" text-anchor="middle" class="a-col">What You See</text>
+
+            <rect x="510" y="78" width="210" height="52" class="bx-purple"/>
+            <text x="615" y="98" text-anchor="middle" class="a-l">Product Update Review</text>
+            <text x="615" y="114" text-anchor="middle" class="a-s">What shipped × what it affects</text>
+            <text x="615" y="126" text-anchor="middle" class="a-xs">Approve / modify / skip each change</text>
+
+            <rect x="510" y="142" width="210" height="48" class="bx-purple"/>
+            <text x="615" y="162" text-anchor="middle" class="a-l">This Hub</text>
+            <text x="615" y="178" text-anchor="middle" class="a-s">Module status, freshness, feature deps</text>
+
+            <rect x="510" y="202" width="210" height="48" class="bx-green"/>
+            <text x="615" y="222" text-anchor="middle" class="a-l">Coverage Gaps</text>
+            <text x="615" y="238" text-anchor="middle" class="a-s">Features shipped but not taught anywhere</text>
+
+            <rect x="510" y="262" width="210" height="48" class="bx-green"/>
+            <text x="615" y="282" text-anchor="middle" class="a-l">Scaffolded Programs</text>
+            <text x="615" y="298" text-anchor="middle" class="a-s">Modules generated from Drive sources</text>
+
+            <!-- ═══ HUMAN IN THE LOOP ═══ -->
+            <rect x="510" y="340" width="210" height="40" class="bx-orange"/>
+            <text x="615" y="365" text-anchor="middle" class="a-l">&#9998; Human Review &amp; Approval</text>
+
+            <rect x="510" y="392" width="210" height="40" class="bx"/>
+            <text x="615" y="412" text-anchor="middle" class="a-s">Nothing changes without your sign-off.</text>
+            <text x="615" y="424" text-anchor="middle" class="a-xs">Approved changes → .md files → hub auto-updates</text>
+
+            <!-- ═══ ARROWS: Sources → Registry ═══ -->
+            <path d="M165,102 L206,102" class="arr"/>
+            <path d="M165,162 L206,162" class="arr"/>
+            <path d="M165,222 L206,190" class="arr" stroke-dasharray="4,3"/>
+
+            <!-- Registry → Skills -->
+            <path d="M310,218 L310,266" class="arr"/>
+
+            <!-- Skills → Outputs -->
+            <path d="M410,290 L506,100" class="arr-accent"/>
+            <path d="M410,296 L506,166" class="arr-accent"/>
+            <path d="M410,302 L506,226" class="arr-green"/>
+            <path d="M410,352 L506,290" class="arr"/>
+            <path d="M410,400 L506,290" class="arr"/>
+
+            <!-- Review → Human → Apply loop -->
+            <path d="M615,130 L615,136" class="arr"/>
+            <path d="M615,310 L615,336" class="arr-accent"/>
+            <path d="M510,360 L414,360 L414,338" class="arr"/>
+
+            <!-- ═══ BOTTOM: How to extend ═══ -->
+            <rect x="15" y="448" width="790" height="64" rx="8" fill="var(--bg-card, #fff)" stroke="var(--border, #e5e7eb)" stroke-width="1"/>
+            <text x="410" y="470" text-anchor="middle" class="a-l">Extending the system</text>
+            <text x="410" y="487" text-anchor="middle" class="a-s">Add a Slack channel or Drive doc → edit sources.yaml · Add a program → create modules/ folder + sources.yaml entry + run sync.py</text>
+            <text x="410" y="501" text-anchor="middle" class="a-s">Add a module → create .md file with postman_features frontmatter · Skills read sources.yaml at runtime — no skill editing needed</text>
+          </svg>
+        </div>
+
+        <div class="settings-section">
+          <h2>Key Concepts</h2>
+          <p><strong>Config-driven, not code-driven.</strong> Adding sources, programs, or modules means editing <code>sources.yaml</code> and markdown files, not modifying skills or hub code.</p>
+          <p><strong>Coverage gap detection.</strong> Every review checks: "which modules does this update affect?" AND "which shipped features are not taught in any module?" The second question is the safety net.</p>
+          <p><strong>Drive verification.</strong> When a product update affects a module, the review skill pulls the actual slides or facilitator guide from Google Drive to confirm whether the content already covers the change or genuinely needs revision.</p>
+          <p><strong>Human in the loop.</strong> Nothing changes without approval. The system produces a review document with approve / modify / skip decisions. Only approved changes get applied.</p>
+        </div>
+
+        <div class="settings-section">
+          <h2>The sources.yaml File</h2>
+          <p>Single config that controls what the system monitors:</p>
+          <ul>
+            <li><strong><code>slack_channels</code></strong> — Which Slack channels to scan, how often, and how far back to look.</li>
+            <li><strong><code>programs</code></strong> — Every training program, its module directory, and its <code>drive_sources</code> (Google Drive slides/docs the review skill can read for verification).</li>
+            <li><strong><code>reference_docs</code></strong> — Links to design documents and wikis for human reference.</li>
+            <li><strong><code>coverage_settings</code></strong> — Controls for gap detection thresholds.</li>
+          </ul>
+        </div>
+      </div>
+
       <!-- TAB: How It Works -->
-      <div class="settings-tab-content active" id="stab-how-it-works">
+      <div class="settings-tab-content" id="stab-how-it-works">
 
         <div class="settings-section">
           <h2>System Overview</h2>
           <p>The training content lives in individual markdown files, one per module. Each file has YAML frontmatter with machine-readable metadata (feature dependencies, change sensitivity, status) and a markdown body with the teaching content.</p>
-          <p>Three things keep it current:</p>
+          <p>Four things keep it current:</p>
           <ul>
-            <li><strong>Module files</strong> — Each module owns its content, declares the Postman features it depends on, and defines what product changes should trigger a review.</li>
-            <li><strong>Academy Hub</strong> — Reads the module metadata to display status, flag affected modules, and show the overall health of the training content.</li>
-            <li><strong>Automated monitoring</strong> — A scheduled Cowork task scans Postman's #product-updates Slack channel weekly, compares against each module's <code>postman_features</code> list, and produces a review document for human approval.</li>
+            <li><strong>Module files</strong> — Each module declares the Postman features it depends on and what product changes should trigger a review.</li>
+            <li><strong>sources.yaml</strong> — Single config listing every Slack channel, training program, and Google Drive source doc. Add a source = add a YAML block.</li>
+            <li><strong>Automated monitoring</strong> — Scheduled tasks scan Slack for product updates, map them against every module's feature list, verify against actual Drive content, and produce a review document with coverage gap detection.</li>
+            <li><strong>This hub</strong> — Displays module status, freshness, and feature dependencies so teammates can check weekly without touching any files.</li>
           </ul>
         </div>
 
         <div class="settings-section">
           <h2>Update Pipeline</h2>
-          <p>How a product change flows from Slack all the way to updated training content:</p>
+          <p>How a product change flows from Slack all the way to updated training content. The system reads <code>sources.yaml</code> for all configured channels and programs.</p>
           <div class="pipeline">
             <div class="pipeline-step">
               <div class="pipeline-dot">1</div>
               <div class="pipeline-text">
                 <div class="pipeline-label">Postman ships a change</div>
-                <div class="pipeline-sublabel">Posted to #product-updates on Slack</div>
+                <div class="pipeline-sublabel">Posted to one or more Slack channels listed in <code>sources.yaml</code></div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">2</div>
               <div class="pipeline-text">
-                <div class="pipeline-label">Cowork weekly scan</div>
-                <div class="pipeline-sublabel"><code>review-product-updates</code> skill reads the last 7 days of posts</div>
+                <div class="pipeline-label">Cowork daily scan</div>
+                <div class="pipeline-sublabel"><code>review-product-updates</code> reads ALL channels from <code>sources.yaml</code>, de-duplicates across sources</div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">3</div>
               <div class="pipeline-text">
-                <div class="pipeline-label">Impact mapping</div>
-                <div class="pipeline-sublabel">Each update is compared against every module's <code>postman_features</code> list — High / Medium / Low / None</div>
+                <div class="pipeline-label">Impact mapping (all programs)</div>
+                <div class="pipeline-sublabel">Each update compared against every module's <code>postman_features</code> in ALL active programs — not just bootcamp</div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">4</div>
               <div class="pipeline-text">
-                <div class="pipeline-label">Product Update Review document</div>
-                <div class="pipeline-sublabel">Structured markdown with recommended actions for each affected module, saved to the outputs folder</div>
+                <div class="pipeline-label">Drive content verification</div>
+                <div class="pipeline-sublabel">For high-impact changes, reads actual slides and facilitator guides from Google Drive to check current state</div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">5</div>
               <div class="pipeline-text">
-                <div class="pipeline-label">Human review &amp; approval</div>
-                <div class="pipeline-sublabel">Marcus reviews, approves, modifies, or skips each proposed change</div>
+                <div class="pipeline-label">Coverage gap detection</div>
+                <div class="pipeline-sublabel">Features in updates NOT covered by any module are flagged automatically</div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">6</div>
               <div class="pipeline-text">
-                <div class="pipeline-label"><code>apply-approved-updates</code> skill</div>
-                <div class="pipeline-sublabel">Writes approved changes back to module <code>.md</code> files — frontmatter status, dates, and body content</div>
+                <div class="pipeline-label">Product Update Review document</div>
+                <div class="pipeline-sublabel">Structured markdown with proposed changes, gap warnings, and approve / modify / skip decisions</div>
               </div>
             </div>
             <div class="pipeline-step">
               <div class="pipeline-dot">7</div>
+              <div class="pipeline-text">
+                <div class="pipeline-label">Human review &amp; approval</div>
+                <div class="pipeline-sublabel">Review, approve, modify, or skip each proposed change — including coverage gap resolutions</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-dot">8</div>
+              <div class="pipeline-text">
+                <div class="pipeline-label"><code>apply-approved-updates</code> skill</div>
+                <div class="pipeline-sublabel">Writes approved changes to module <code>.md</code> files across all programs, resolves coverage gaps</div>
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <div class="pipeline-dot">9</div>
               <div class="pipeline-text">
                 <div class="pipeline-label">Hub reflects new state</div>
                 <div class="pipeline-sublabel">Module status and freshness indicators update on the next hub load</div>
@@ -1915,6 +2077,7 @@
             </div>
           </div>
         </div>
+
 
         <div class="settings-section">
           <h2>Module Status Lifecycle</h2>
@@ -1976,10 +2139,13 @@
 
         <div class="settings-section">
           <h2>Source Materials</h2>
+          <p>Source materials are registered in <code>sources.yaml</code> — either as <code>drive_sources</code> per program (for automated verification) or as <code>reference_docs</code> (for human reference).</p>
           <table class="cadence-table">
             <thead><tr><th>Document</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td><code>modules/SYSTEM.md</code></td><td>This operations guide — the source of truth for how the system works</td></tr>
+              <tr><td><code>sources.yaml</code></td><td>Master registry — Slack channels, programs, Drive docs, coverage settings</td></tr>
+              <tr><td><code>sync.py</code></td><td>Generates hub data (CLASSES array) from module .md files</td></tr>
+              <tr><td><code>modules/SYSTEM.md</code></td><td>Operations guide — how the system works</td></tr>
               <tr><td><code>modules/SCHEMA.md</code></td><td>Standard format for all module markdown files</td></tr>
               <tr><td><a href="https://docs.google.com/document/d/1D7o7IYvkrQm2FeCgbh7SisnzF4Xlbc6pA1QJInGh-y4/edit" target="_blank" style="color:var(--accent);">V11 Bootcamp Flow ↗</a></td><td>Original facilitator flow (Google Doc)</td></tr>
               <tr><td><a href="https://docs.google.com/document/d/1D14mLqe-BIz3dseLtvF9IVgUClZmfCICfFERnfStnog/edit" target="_blank" style="color:var(--accent);">Bootcamp Review ↗</a></td><td>Analysis of what needed restructuring (Google Doc)</td></tr>
@@ -1994,7 +2160,7 @@
         <div class="settings-section" style="margin-bottom:20px;">
           <h2>What Are Skills?</h2>
           <p>Skills are reusable automation workflows that run in Cowork. Each one is a self-contained instruction set — Claude reads the skill's <code>SKILL.md</code> file and executes the defined procedure step by step. Skills can read from Slack, write files, update the hub, and chain into each other.</p>
-          <p>The three hub-specific skills form a weekly loop: <strong>review</strong> → human approval → <strong>apply</strong>. A fourth skill, <strong>draft announcement</strong>, runs in parallel on Fridays to communicate what shipped to the company.</p>
+          <p>The three hub-specific skills form a pipeline: <strong>scaffold</strong> (generates module files from Drive) → <strong>review</strong> (scans Slack, maps to modules) → human approval → <strong>apply</strong> (writes approved changes). All skills read <code>sources.yaml</code> at runtime — no skill editing needed when sources or programs change.</p>
         </div>
 
         <div class="skills-grid">
@@ -2007,11 +2173,12 @@
                 <div class="skill-trigger">/review-product-updates</div>
               </div>
             </div>
-            <div class="skill-desc">Reads the past 7 days of #product-updates on Slack. Maps each change against every module's <code>postman_features</code> list. Produces a structured Product Update Review document with approve / modify / skip decisions for each affected module.</div>
+            <div class="skill-desc">Reads <code>sources.yaml</code> to discover all configured Slack channels. Scans each for product updates, maps against every module's <code>postman_features</code> across ALL active programs, detects coverage gaps, and produces a structured review document with approve / modify / skip decisions.</div>
             <div class="skill-tags">
-              <span class="skill-tag">⚡ Weekly scheduled</span>
-              <span class="skill-tag">Reads Slack</span>
-              <span class="skill-tag">Writes .md file</span>
+              <span class="skill-tag">⚡ Daily scheduled</span>
+              <span class="skill-tag">Reads sources.yaml</span>
+              <span class="skill-tag">Multi-program scan</span>
+              <span class="skill-tag">Coverage gap detection</span>
               <span class="skill-tag">Human approval required</span>
             </div>
           </div>
@@ -2024,28 +2191,29 @@
                 <div class="skill-trigger">/apply-approved-updates</div>
               </div>
             </div>
-            <div class="skill-desc">Takes a reviewed and approved Product Update Review document and writes the changes back to the module <code>.md</code> files. Updates frontmatter (status, last_updated, last_audited) and body content. Only acts on what's explicitly approved — never touches skipped items.</div>
+            <div class="skill-desc">Takes a reviewed and approved Product Update Review document and writes changes to module <code>.md</code> files across all programs. Reads <code>sources.yaml</code> to locate module directories. Updates frontmatter, body content, resolves coverage gaps. Only acts on explicitly approved items.</div>
             <div class="skill-tags">
               <span class="skill-tag">Triggered by human</span>
-              <span class="skill-tag">Edits module files</span>
+              <span class="skill-tag">Multi-program writes</span>
+              <span class="skill-tag">Resolves coverage gaps</span>
               <span class="skill-tag">Updates hub data layer</span>
             </div>
           </div>
 
           <div class="skill-card">
             <div class="skill-card-header">
-              <div class="skill-icon">&#128226;</div>
+              <div class="skill-icon">&#128221;</div>
               <div>
-                <div class="skill-name">draft-p4p-announcement</div>
-                <div class="skill-trigger">/draft-p4p-announcement</div>
+                <div class="skill-name">scaffold-program</div>
+                <div class="skill-trigger">/scaffold-program</div>
               </div>
             </div>
-            <div class="skill-desc">Drafts the weekly "This Week in Postman" Slack announcement. Reads recent product updates, selects 3–5 highlights, connects each to relevant P4P sessions, and formats a ready-to-review Slack message. Human always reviews before it posts.</div>
+            <div class="skill-desc">Reads a program's <code>drive_sources</code> from <code>sources.yaml</code>, pulls slide decks and facilitator guides from Google Drive, identifies modules, and generates structured <code>.md</code> files with full frontmatter and teaching content. Runs <code>sync.py --write</code> to update the hub. Must run before the first review after adding a new program.</div>
             <div class="skill-tags">
-              <span class="skill-tag">⚡ Friday scheduled</span>
-              <span class="skill-tag">Reads Slack</span>
-              <span class="skill-tag">Writes draft message</span>
-              <span class="skill-tag">Human posts</span>
+              <span class="skill-tag">Triggered by human</span>
+              <span class="skill-tag">Reads Drive sources</span>
+              <span class="skill-tag">Generates module .md files</span>
+              <span class="skill-tag">Runs sync.py</span>
             </div>
           </div>
 
@@ -2105,7 +2273,7 @@
 
         <div class="settings-section">
           <h2>Module File Format</h2>
-          <p>Every module — bootcamp or P4P — follows this schema so the hub can parse, display, and monitor it for product update impacts. The file has two layers: YAML frontmatter (machine-readable) and a markdown body (human-readable teaching content).</p>
+          <p>Every module follows this schema so the hub can parse, display, and monitor it for product update impacts. The file has two layers: YAML frontmatter (machine-readable) and a markdown body (human-readable teaching content).</p>
         </div>
 
         <div class="settings-section">
@@ -2114,7 +2282,7 @@
           <pre><code>---
 id: M04                              # Unique identifier
 title: "API Design &amp; Architecture"   # Display name
-program: bootcamp                    # bootcamp | p4p | etc.
+program: bootcamp                    # bootcamp | 101 | 201 | etc.
 owner: Marcus Kidan                  # Content owner
 change_sensitivity: medium           # low | medium | high
 status: current                      # current | needs_review | update_in_progress | outdated
@@ -2138,7 +2306,7 @@ update_triggers:                     # What changes should flag this module
           <table class="schema-table">
             <thead><tr><th>Field</th><th>Required</th><th>Type</th><th>Purpose</th></tr></thead>
             <tbody>
-              <tr><td><code>id</code></td><td><span class="schema-required">Yes</span></td><td>string</td><td>Unique module ID (M01, P4P-101, etc.)</td></tr>
+              <tr><td><code>id</code></td><td><span class="schema-required">Yes</span></td><td>string</td><td>Unique module ID (M01, 101-01, 201-01, etc.)</td></tr>
               <tr><td><code>title</code></td><td><span class="schema-required">Yes</span></td><td>string</td><td>Human-readable display name</td></tr>
               <tr><td><code>program</code></td><td><span class="schema-required">Yes</span></td><td>string</td><td>Which program this belongs to</td></tr>
               <tr><td><code>owner</code></td><td><span class="schema-required">Yes</span></td><td>string</td><td>Who maintains this module</td></tr>
@@ -2172,18 +2340,20 @@ update_triggers:                     # What changes should flag this module
 
         <div class="settings-section">
           <h2>File Naming Convention</h2>
-          <p>Pattern: <code>{ID}-{slug}.md</code> where the slug is a lowercase, hyphenated short name.</p>
+          <p>Pattern: <code>{ID}-{slug}.md</code> where the slug is a lowercase, hyphenated short name. Each program uses its own ID prefix (from <code>sources.yaml</code>).</p>
           <pre><code>modules/
   SCHEMA.md              ← This schema (source of truth)
   SYSTEM.md              ← Operations guide
-  bootcamp/
+  bootcamp/              ← Prefix: M
     M01-welcome.md
     M02-internet-apis.md
-    M03-how-apis-work.md
     ...
     M12-wrap-up.md
-  p4p/                   ← Future: P4P class files
-    P4P-101-api-basics.md</code></pre>
+  101/                   ← Prefix: 101
+    101-01-what-are-apis.md
+    101-02-api-basics.md
+  201/                   ← Prefix: 201
+    201-01-advanced-auth.md</code></pre>
         </div>
 
       </div>
@@ -2193,69 +2363,77 @@ update_triggers:                     # What changes should flag this module
 
         <div class="settings-section">
           <h2>Workspace Layout</h2>
-          <p>Everything lives in your selected folder. The hub is a self-contained HTML file; the modules are individual markdown files; the skills run in Cowork and write to this same folder.</p>
+          <p>Everything lives in your selected folder. The hub is a self-contained HTML file; the modules are individual markdown files; the skills run in Cowork and write to this same folder. <code>sources.yaml</code> is the central config that ties everything together.</p>
           <pre><code>TechnicalTrainer/
   index.html                              ← The hub UI (this file)
+  sources.yaml                            ← Data sources registry (channels, Drive, programs)
 
   modules/
-    SYSTEM.md                             ← Operations guide (source of this Settings page)
+    SYSTEM.md                             ← Operations guide
     SCHEMA.md                             ← Module file format specification
-    bootcamp/
-      M01-welcome.md                      ← 12 bootcamp modules
+    bootcamp/                             ← Fundamentals Bootcamp (12 modules)
+      M01-welcome.md
       M02-internet-apis.md
-      M03-how-apis-work.md
-      M04-api-design.md
-      M05-security.md
-      M06-git-version-control.md
-      M07-developer-experience.md
-      M08-ai-agents.md
-      M09-postman-platform.md
-      M10-hands-on-lab.md
-      M11-lifecycle-governance.md
+      ...
       M12-wrap-up.md
-    p4p/                                  ← Future: P4P 101/201 class files
+    101/                                  ← API 101 (add modules here)
+    201/                                  ← API 201 Advanced (add modules here)
+
+  skill-updates/                          ← Updated skill instructions (for reinstalling)
+    review-product-updates-SKILL.md
+    apply-approved-updates-SKILL.md
 
   Bootcamp Modular System Playbook.md     ← Full architecture &amp; design playbook
-  Postman for Postmanauts - Program Playbook.md
 
-  Product Update Review - YYYY-MM-DD.md  ← Auto-generated weekly by review skill</code></pre>
+  Product Update Review - YYYY-MM-DD.md  ← Auto-generated by review skill</code></pre>
         </div>
 
         <div class="settings-section">
           <h2>Cowork Skills Location</h2>
-          <p>Skills are installed in the hidden <code>.claude/skills/</code> directory. Each skill has its own folder containing a <code>SKILL.md</code> with the instruction set Claude reads before executing.</p>
+          <p>Skills are installed in the hidden <code>.claude/skills/</code> directory. Each skill has its own folder containing a <code>SKILL.md</code> with the instruction set Claude reads before executing. All hub skills now read <code>sources.yaml</code> at runtime.</p>
           <pre><code>.claude/
   skills/
     review-product-updates/
-      SKILL.md                            ← Weekly Slack → review doc workflow
+      SKILL.md                            ← Multi-source scan → review doc + gap detection
     apply-approved-updates/
-      SKILL.md                            ← Approved changes → module file updates
-    draft-p4p-announcement/
-      SKILL.md                            ← Friday Slack announcement drafter
+      SKILL.md                            ← Approved changes → multi-program module updates
+    scaffold-program/
+      SKILL.md                            ← Generate modules from Drive sources
     schedule/
       SKILL.md                            ← Scheduling utility
     skill-creator/
       SKILL.md                            ← Build &amp; benchmark new skills
-    docx/
-      SKILL.md                            ← Word document creation
-    pptx/
-      SKILL.md                            ← PowerPoint creation
-    pdf/
-      SKILL.md                            ← PDF manipulation
-    xlsx/
-      SKILL.md                            ← Spreadsheet creation</code></pre>
+    docx/ pptx/ pdf/ xlsx/
+      SKILL.md                            ← Document creation skills
+
+TechnicalTrainer/
+  skill-updates/                          ← Updated skill instructions (use skill-creator to install)
+    review-product-updates-SKILL.md
+    apply-approved-updates-SKILL.md</code></pre>
         </div>
 
         <div class="settings-section">
           <h2>Adding a New Module</h2>
           <ol>
-            <li><strong>Choose the right directory</strong> — <code>bootcamp/</code> for bootcamp modules, <code>p4p/</code> for P4P classes.</li>
+            <li><strong>Choose the right directory</strong> — <code>bootcamp/</code>, <code>101/</code>, <code>201/</code>, or any program folder listed in <code>sources.yaml</code>.</li>
             <li><strong>Follow the schema</strong> — Copy the structure from <code>modules/SCHEMA.md</code>. Every frontmatter field is required.</li>
-            <li><strong>Name the file</strong> — Pattern: <code>{ID}-{slug}.md</code> (e.g., <code>M13-advanced-testing.md</code>).</li>
+            <li><strong>Name the file</strong> — Pattern: <code>{ID}-{slug}.md</code> (e.g., <code>M13-advanced-testing.md</code> or <code>101-04-api-security.md</code>).</li>
             <li><strong>Declare feature dependencies</strong> — The <code>postman_features</code> list connects your module to the monitoring system. Be specific.</li>
             <li><strong>Set change sensitivity</strong> — Determines how often this module gets checked after product releases.</li>
             <li><strong>Write update triggers</strong> — Plain-language descriptions of what kinds of product changes should flag this module for review.</li>
-            <li><strong>The hub will pick it up</strong> — Once the file exists with valid frontmatter, add it to the <code>CLASSES</code> data array in <code>index.html</code> and it will appear automatically.</li>
+            <li><strong>Ensure the program is registered</strong> — The program needs an entry in <code>sources.yaml</code> (under <code>programs</code>) and a <code>CLASSES</code> entry in <code>index.html</code>.</li>
+            <li><strong>The system picks it up</strong> — Module appears in the hub and gets included in all automated scans automatically.</li>
+          </ol>
+        </div>
+
+        <div class="settings-section">
+          <h2>Adding a New Training Program</h2>
+          <ol>
+            <li><strong>Create the directory</strong> — <code>modules/{program-name}/</code> (e.g., <code>modules/201/</code>).</li>
+            <li><strong>Add module files</strong> — Follow <code>SCHEMA.md</code> for the format. Use a consistent ID prefix (e.g., <code>201-01</code>).</li>
+            <li><strong>Register in sources.yaml</strong> — Add a block under <code>programs</code> with the program's id, name, module_dir, and module_prefix.</li>
+            <li><strong>Register in index.html</strong> — Add a <code>CLASSES</code> entry with the program metadata and module data.</li>
+            <li><strong>Done</strong> — Skills read <code>sources.yaml</code> at runtime and will include the new program in all scans.</li>
           </ol>
         </div>
 
@@ -2263,30 +2441,6 @@ update_triggers:                     # What changes should flag this module
 
     </div>
 
-    <!-- P4P SESSIONS PAGE -->
-    <div class="page" id="page-p4p">
-      <div class="page-header">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-          <div>
-            <div class="page-title">Postman for Postmanauts</div>
-            <div class="page-tagline">Just-in-time upskilling for every Postmanaut</div>
-          </div>
-          <a href="https://postman.com" class="action-link" target="_blank">Book a Session &#8594;</a>
-        </div>
-      </div>
-
-      <div class="filter-row" id="session-filters"></div>
-      <div class="session-grid" id="session-grid"></div>
-
-      <!-- Collapsible announcement cadence -->
-      <div class="collapsible" id="cadence-section">
-        <button class="collapsible-toggle" onclick="toggleCollapsible('cadence-section')">
-          <span class="collapsible-arrow">&#9654;</span>
-          Promotion &amp; Cadence
-        </button>
-        <div class="collapsible-body" id="cadence-body"></div>
-      </div>
-    </div>
   </main>
 </div>
 
@@ -2319,7 +2473,7 @@ const CLASSES = [
     name: "Fundamentals Bootcamp",
     shortName: "Bootcamp",
     icon: "&#9670;",
-    description: "12 topic-based modules for new-hire onboarding",
+    description: "12-module new-hire onboarding program",
     slidesLink: "https://docs.google.com/presentation/d/your-slides-link",
     sourceDir: "modules/bootcamp/",
     modules: [
@@ -2328,9 +2482,9 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M01-welcome.md",
         features: [],
-        overview: "Establishes psychological safety and community. Frames Postman's evolution from collaboration tool to AI-native development platform, sets expectations, and helps participants connect.",
+        overview: "This opening module establishes psychological safety and community within the bootcamp cohort. We frame Postman's evolution from a collaboration tool to an AI-native development platform, set expectations for the day, and help participants connect with each other.",
         learningObjectives: ["Feel safe to ask questions and participate actively", "Understand the day's arc and what you'll learn", "Connect with fellow participants and establish community"],
-        keyElements: ["\"This is a collaboration class\" framing", "Go-around: name, role, where you flew in from", "Icebreaker: \"What technology made you feel like you were in the future?\"", "Postman's evolution arc: collaboration tool → AI-native platform", "Agenda overview: what we'll cover and why"],
+        keyElements: ["Establishing Psychological Safety", "Introductions & Icebreaker", "Postman's Evolution & Today's Arc", "Agenda Overview"],
         activity: null,
         painPoint: null,
         updateTriggers: ["Major company pivot or strategic reframing"],
@@ -2341,11 +2495,11 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M02-internet-apis.md",
         features: [],
-        overview: "What the internet is, what APIs are, and the City Metaphor that anchors every module. Two definitions of API (technical + human), the Bezos Mandate story, and real-world examples.",
+        overview: "This module introduces the core concept of APIs by building from what the internet is, to what APIs are, using concrete metaphors. We establish both technical and human definitions of APIs and show how they power the applications participants use every day.",
         learningObjectives: ["Explain what an API is in both technical and human terms", "Use the City Metaphor to reason about internet architecture", "Identify the APIs behind familiar applications"],
-        keyElements: ["City Metaphor: internet = city, HTTP = roads, URLs = addresses", "Two API definitions: technical contract + \"the apps your apps use\"", "The Bezos Mandate as origin story", "Netflix example: 5 buildings for one app"],
-        activity: "\"What APIs (buildings) would you need for a weather app?\" — thinking like city planners",
-        painPoint: "Discovery — How do you find the right building in a city of millions?",
+        keyElements: ["What is the Internet?", "Two Definitions of an API", "The Bezos Mandate Story", "Netflix as a City: The Five Buildings", "Building Types in the City"],
+        activity: "Present a simple scenario: \"You're building a weather app. Walk me through the city. What buildings would you need to visit, and what would you ask them for?\"",
+        painPoint: "Discovery – \"How do you even find the right building in a city of millions?\" This is a real problem in API development. There are thousands of public APIs, and finding the right one for your use case is hard. Later modules will address how to document and search for APIs.",
         updateTriggers: ["Fundamental shift in Postman's API narrative"],
         lastAffected: null
       },
@@ -2354,11 +2508,11 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M03-how-apis-work.md",
         features: [],
-        overview: "Client-server model, CRUD operations, HTTP methods, request/response anatomy, URLs, and status codes. The receptionist metaphor makes the abstract concrete.",
-        learningObjectives: ["Describe the client-server request/response cycle", "Map CRUD operations to HTTP methods", "Read a URL and identify its components (server, endpoint, query params)"],
-        keyElements: ["Receptionist metaphor for request handling", "CRUD: Create, Read, Update, Delete", "HTTP methods mapped to interactions", "Status codes: 200, 404, 401, 500", "URL anatomy: server/endpoint/query"],
-        activity: "\"What HTTP method is liking a post? What about unliking?\"",
-        painPoint: "Testing — How do you know the receptionist is giving the right response?",
+        overview: "This module teaches the mechanics of how APIs work at a practical level. We introduce the client-server model, CRUD operations, HTTP methods, and the anatomy of requests and responses. By the end, participants understand that they're already using these concepts—we're just naming them.",
+        learningObjectives: ["Describe the client-server request/response cycle", "Map CRUD operations to HTTP methods", "Read a URL and identify its components (server, endpoint, query parameters)"],
+        keyElements: ["The Client-Server Model", "CRUD: The Four Things You Can Do With Data", "HTTP Methods: The Language of CRUD", "The Receptionist Metaphor", "Request Anatomy", "Response Anatomy"],
+        activity: "Pose this to the class: \"When you like a post on social media, what's happening? What HTTP method is that?\"",
+        painPoint: "Testing – \"How do you know the receptionist is giving you the right response?\" This is where Postman enters in future modules. Right now, you might test an API by hand (typing in a browser), but that's limited. Postman lets you craft precise requests, see exact responses, and repeat tests reliably.",
         updateTriggers: ["New HTTP methods or API patterns become mainstream"],
         lastAffected: null
       },
@@ -2367,11 +2521,11 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M04-api-design.md",
         features: ["API Builder/Editor", "Mock Servers", "OpenAPI spec support"],
-        overview: "REST as a design philosophy, API-first vs. code-first trade-offs, specs vs. documentation, monolith vs. microservices, and API versioning. Design decisions are deliberate, not accidental.",
-        learningObjectives: ["Distinguish between API-first and code-first development approaches", "Explain what an API spec is versus documentation", "Understand monolith vs. microservices architecture trade-offs"],
-        keyElements: ["\"Design choices, not hard science\" — fork-in-the-drawer analogy", "REST as \"the sit-down restaurant\" of API styles", "Specs vs Docs: blueprint vs lobby brochure", "Monolith vs microservices: department store vs specialist district"],
-        activity: "Two Restaurants — Menu First vs. Sell Tomorrow reveals API-first vs. code-first",
-        painPoint: "Design decisions must happen before development. Classic docs vs. living docs.",
+        overview: "This module shifts from \"how APIs work\" to \"how they're designed.\" We explore REST as a design philosophy (not law), the trade-offs between API-first and code-first development, the difference between specs and documentation, and how system architecture affects API design. By the end, participants understand that API design is a series of deliberate choices, and Postman tools help you make and test those choices before committing to code.",
+        learningObjectives: ["Distinguish between API-first and code-first development approaches", "Explain what an API spec is versus documentation", "Understand monolith versus microservices architecture trade-offs"],
+        keyElements: ["REST as Design Choice, Not Hard Science", "The Fork-in-Drawer Analogy", "API-First vs. Code-First Development", "Specs vs. Docs: Blueprint vs. Brochure", "Monolith vs. Microservices: Department Store vs. Specialist District", "API Versioning: Building Renovations"],
+        activity: "Divide the class into two groups.",
+        painPoint: "Design Decisions Made Late:  \n\"Design decisions must happen before committing to development.\" Many teams jump straight to coding without asking \"what is our API supposed to look like?\" This is expensive to fix later. Postman's API Builder forces you to design first.",
         updateTriggers: ["New spec format support", "Design tooling UI changes", "Mock server feature updates", "API Builder/Editor changes"],
         lastAffected: null
       },
@@ -2380,24 +2534,24 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M05-security.md",
         features: ["Auth tab", "API key management", "OAuth 2.0 flows", "Vault integration"],
-        overview: "Why APIs need security, the mechanisms that provide it (API keys, OAuth, JWT), and the critical distinction between authentication and authorization.",
-        learningObjectives: ["Distinguish between authentication and authorization", "Explain common auth mechanisms (API keys, OAuth, JWT)", "Identify how Postman handles API security in practice"],
-        keyElements: ["API keys = building badge, OAuth = valet ticket, JWT = visitor pass", "Auth vs authz: badge gets you in, clearance determines floors", "Rate limiting = max occupancy", "CORS = visitors from approved neighborhoods only"],
-        activity: "Security scenarios discussion — diagnosing common 401/403 situations",
-        painPoint: "Security governance at scale — ensuring every building has proper security",
+        overview: "APIs are the digital doors to your applications and data. Without proper security, anyone could walk in. In this module, we explore authentication and authorization—the gatekeeping mechanisms that protect APIs at scale. You'll learn how Postman helps teams manage API security, from simple API keys to complex OAuth flows, and how to prevent common security pitfalls.",
+        learningObjectives: ["Distinguish between authentication and authorization", "Explain common authentication mechanisms (API keys, OAuth 2.0, JWT)", "Identify how Postman handles API security in practice", "Apply security concepts to real-world API governance scenarios"],
+        keyElements: ["Authentication vs. Authorization", "Common Authentication Mechanisms", "Other Security Concepts"],
+        activity: "### Discussion Prompt: Security at Scale",
+        painPoint: "Security Governance at Scale: Organizations struggle to ensure every API is properly secured and that credentials don't leak. Postman's Vault and Auth tab centralize credential management, making audits and rotation easier.",
         updateTriggers: ["New auth types added", "Auth UI changes", "Security governance features added", "Vault or secrets management updates"],
-        lastAffected: "Apr 7"
+        lastAffected: null
       },
       {
         id: "M06", name: "Git & Version Control", sensitivity: "high",
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M06-git-version-control.md",
         features: ["Native Git integration", "Branching", "Pull requests for API changes", "Version history"],
-        overview: "What Git is, core concepts (repo, branch, commit, PR, merge), and why Postman went Git-native — bringing API development into the branching workflow engineers already use.",
-        learningObjectives: ["Explain core Git concepts (repo, branch, commit, PR, merge)", "Understand why Postman adopted native Git integration", "Connect version control to the API development lifecycle"],
-        keyElements: ["Architects-on-blueprints metaphor", "Core terms: repo, branch, commit, PR, merge", "Git is native in Postman — no context switching", "City version control — every blueprint change is tracked"],
-        activity: "Map API change scenarios to Git workflows",
-        painPoint: "Visibility and context switching in API version management",
+        overview: "Version control isn't just for code. Your APIs change just as frequently—and with just as much risk. In this module, you'll learn why Postman adopted native Git integration and how it connects API development to the versioning workflows your engineering teams already use. We'll explore Git fundamentals, then dive into how Postman lets you collaborate, branch, and review API changes with the same rigor as code reviews.",
+        learningObjectives: ["Explain core Git concepts (repo, branch, commit, pull request, merge)", "Understand why Postman adopted native Git integration", "Connect version control to the API development lifecycle", "Apply branching and PR workflows to collaborative API design"],
+        keyElements: ["Why Version Control Matters for APIs", "Core Git Concepts", "Why Postman Went Native Git"],
+        activity: "### Conceptual Exercise: Git Workflow Mapping",
+        painPoint: "Lack of Visibility: Teams don't know when or why API contracts changed. Git provides a complete audit trail with commit messages explaining the \"why.\"",
         updateTriggers: ["Any Git-related feature release", "Branching workflow changes", "Pull request feature updates", "Version history UI changes"],
         lastAffected: null
       },
@@ -2406,11 +2560,11 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M07-developer-experience.md",
         features: ["Postman CLI", "CI/CD integration", "Workspace collaboration", "Environments"],
-        overview: "A day in the life of a software engineer: inner vs. outer dev loop, what engineers care about, and the five API personas that use Postman differently.",
-        learningObjectives: ["Describe the inner and outer developer loops", "Identify the five API personas and what they care about", "Map engineering activities to Postman capabilities"],
-        keyElements: ["Inner dev loop: write → run → test → fix → repeat", "Outer dev loop: review, CI/CD, staging, QA, releases", "What engineers care about: speed, less context switching, not breaking things", "Five personas: Developer, Consumer, Architect, QA, Tech Writer"],
-        activity: "\"Connect these engineering activities to Postman features\"",
-        painPoint: "Context switching and feedback speed in the developer workflow",
+        overview: "Developer experience (DX) isn't a nice-to-have—it's a business driver. Fast feedback loops attract talent, reduce bugs, and ship features faster. In this module, we explore what engineers care about in their daily work: speed of feedback, minimal context switching, and tools they trust. You'll learn the inner and outer developer loops, meet five API personas with distinct needs, and discover how Postman fits into each one's workflow.",
+        learningObjectives: ["Describe the inner and outer developer loops and how they differ", "Identify the five API personas and what each one cares about", "Map engineering activities to Postman capabilities", "Understand how Postman reduces context switching and accelerates feedback"],
+        keyElements: ["The Inner Loop", "The Outer Loop", "What Engineers Care About", "Five API Personas"],
+        activity: "### Connect Engineering Activities to Postman Features",
+        painPoint: "Slow Inner Loop Feedback: Engineers test endpoints, then wait minutes for CI/CD, staging validation. Postman Client and local testing accelerate feedback to seconds.",
         updateTriggers: ["CLI changes or new CLI features", "IDE integration updates", "Workspace feature changes", "Environment management updates"],
         lastAffected: null
       },
@@ -2419,84 +2573,197 @@ const CLASSES = [
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M08-ai-agents.md",
         features: ["Agent mode", "AI test generation", "AI debugging", "AI documentation generation", "MCP server support", "Flows AI", "CLI Generator"],
-        overview: "The difference between generative and agentic AI, Model Context Protocol (MCP), and Postman's full suite of AI capabilities — from test generation to debugging to documentation.",
-        learningObjectives: ["Explain what makes AI 'agentic' vs. purely generative", "Understand MCP and why it matters for API tooling", "Identify Postman's AI-powered capabilities and when to use each"],
-        keyElements: ["LLMs: pattern recognition at massive scale, probabilistic not deterministic", "Agentic = AI can use tools, not just generate text", "MCP: underground highway for AI agent access to tools and data", "Postman AI: Agent mode, test gen, debugging, docs, Flows AI, CLI Generator"],
-        activity: "Agent Mode demo — generate tests for a payment API, review and critique output",
-        painPoint: "Test automation burden, documentation debt, debugging friction",
+        overview: "AI is reshaping how engineers work. But not all AI is created equal. In this module, we explore the difference between AI that generates text and AI that *acts*—agentic AI that can use tools, make decisions, and solve complex problems. You'll learn about Large Language Models (LLMs), the Model Context Protocol (MCP), and how Postman's AI capabilities turn repetitive API tasks into automated workflows. By the end, you'll understand how to harness Postman's AI agents to accelerate development, testing, debugging, and documentation.",
+        learningObjectives: ["Explain what makes AI \"agentic\" vs. purely generative", "Understand the Model Context Protocol (MCP) and why it matters for API tooling", "Identify Postman's AI-powered capabilities and when to use each one", "Apply AI features to real API development workflows"],
+        keyElements: ["What Are LLMs?", "What Makes AI \"Agentic\"?", "Model Context Protocol (MCP)", "Postman's AI Capabilities"],
+        activity: "### Agent Mode Demo & Discussion",
+        painPoint: "Test Automation Burden: Writing and maintaining tests is tedious and repetitive. AI test generation creates starting points; engineers validate and extend.",
         updateTriggers: ["Any AI or agent feature release", "MCP protocol changes", "Agent mode capability additions", "AI test generation updates", "New AI-powered features"],
-        lastAffected: "Apr 8"
+        lastAffected: null
       },
       {
         id: "M09", name: "The Postman Platform", sensitivity: "high",
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M09-postman-platform.md",
         features: ["AI + Agent Mode", "Native Git", "Local Mock Servers", "Postman CLI", "API Catalog", "Insights", "SDK Distribution"],
-        overview: "What Postman is — the official definition plus the architecture analogy. The full product surface, customer stories (PayPal), and how every persona uses the platform differently.",
-        learningObjectives: ["Articulate what Postman is and its strategic positioning", "Map Postman capabilities to the API lifecycle", "Explain how different roles use the platform differently"],
-        keyElements: ["Official definition + architecture analogy", "Product surface: AI, Git, Mocks, CLI, Catalog, Insights, SDKs", "PayPal case study: one-minute time-to-first-call", "Shared city management layer across all personas"],
-        activity: "Persona mapping — match platform capabilities to roles",
-        painPoint: "Documentation, Discovery, Testing, Design — all consolidated here",
+        overview: "Postman is an AI-native, collaborative platform for development, testing, monitoring, management, and distribution of APIs and Services. This module presents the complete product surface, showing how Postman serves as the orchestrating layer across the entire API lifecycle.",
+        learningObjectives: [],
+        keyElements: ["Official Definition", "Full Product Surface"],
+        activity: "### Activity 1: Product Mapping (15 minutes)",
+        painPoint: "Documentation Becomes Stale\n- Solution: AI-generated documentation from code, API Catalog as single source of truth\n- Postman Feature: Agent Mode, API Catalog",
         updateTriggers: ["Any major product launch", "Product rebrand or repositioning", "New major capability additions", "Platform narrative changes"],
-        lastAffected: "Apr 8"
+        lastAffected: null
       },
       {
         id: "M10", name: "Hands-On Lab — The Grocery Store", sensitivity: "high",
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M10-hands-on-lab.md",
-        features: ["Collections", "Workspaces", "Forking", "Auth", "Agent Mode", "Mock Servers", "Environments", "Variables", "API Network"],
-        overview: "The Digital Grocery Store project — a narrative-driven, 5-part hands-on lab where the class helps a fictional grocery store modernize through APIs.",
-        learningObjectives: ["Navigate the Postman interface confidently", "Complete an end-to-end API workflow from consuming to publishing", "Apply concepts from previous modules in a hands-on context"],
-        keyElements: ["Lab 10a: The Consumer — find and use an API", "Lab 10b: The Teammate — workspace collaboration", "Lab 10c: The Designer — Agent mode API generation", "Lab 10d: The Prototyper — mock servers and environments", "Lab 10e: The Publisher — API Network publishing"],
-        activity: "Full hands-on lab with 5 sub-modules (can run together or independently)",
-        painPoint: "Bridging theory to practice — applying API concepts in a real workflow",
-        updateTriggers: ["Postman UI changes (button locations, naming, flows)", "Workspace type changes", "Agent mode capability changes", "Collections or forking workflow changes", "Mock server UI changes"],
-        lastAffected: "Apr 7"
+        features: ["Collections", "Workspaces", "Forking", "Authentication", "Agent Mode", "Mock Servers", "Environments", "Variables", "API Network", "Partner Workspaces"],
+        overview: "This module is a narrative-driven, hands-on sequence where participants help a fictional grocery store modernize through APIs. The **Digital Grocery Store** is a multi-phase project that mirrors a real API development lifecycle:",
+        learningObjectives: [],
+        keyElements: ["The Scenario: Digital Grocery Store"],
+        activity: null,
+        painPoint: "UI Navigation is Confusing\n- Solution: Guided walkthroughs, clear step-by-step instructions, labeling of buttons and panels\n- Postman Feature: Postman UI design, help tooltips",
+        updateTriggers: ["Postman UI changes (button locations, naming, flows)", "Workspace type changes", "Agent mode capability changes", "Collections or forking workflow changes", "Mock server UI changes", "API Network changes"],
+        lastAffected: null
       },
       {
         id: "M11", name: "API Lifecycle & Governance", sensitivity: "medium",
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M11-lifecycle-governance.md",
-        features: ["API Catalog", "Insights", "Governance rules", "Workspaces"],
-        overview: "The six-phase API lifecycle, who's involved at each phase, how Postman supports each phase, and how governance (Catalog, Insights) keeps it all organized at scale.",
-        learningObjectives: ["Describe the six phases of the API lifecycle", "Identify which roles are involved at each phase", "Explain how Postman's governance tools support organizational API strategy"],
-        keyElements: ["Six phases: Ideation → Design → Dev → Test → Deploy → Publish", "Roles at each phase: PMs, Architects, Devs, QA, DevOps, Writers", "Postman capabilities mapped to each phase", "Governance: Catalog, Insights, security rules"],
-        activity: "Lifecycle mapping — place Postman features at the right lifecycle phase",
-        painPoint: "API sprawl and governance gaps at enterprise scale",
-        updateTriggers: ["New governance features", "API Catalog changes", "Insights dashboard updates", "Lifecycle positioning changes"],
-        lastAffected: "Apr 3"
+        features: ["API Catalog", "Insights", "Governance rules", "Workspaces", "Full lifecycle tooling"],
+        overview: "APIs don't just exist—they're born, grow, mature, and eventually retire. This module maps the **six-phase API lifecycle** and shows how Postman supports each phase. We'll identify the key roles, pain points, and Postman capabilities at each stage, and introduce governance as the connective tissue that keeps organizations aligned.",
+        learningObjectives: [],
+        keyElements: ["The Six-Phase API Lifecycle", "Governance: The Connective Tissue"],
+        activity: "### Activity 1: Lifecycle Mapping (20 minutes)",
+        painPoint: "APIs are Built Inconsistently\n- Solution: Governance rules enforce standards, architecture reviews ensure alignment\n- Postman Feature: Governance rules, API Catalog",
+        updateTriggers: ["New governance features", "API Catalog changes", "Insights dashboard updates", "Lifecycle positioning changes", "New persona-targeted capabilities"],
+        lastAffected: null
       },
       {
-        id: "M12", name: "Wrap-Up & Bridge to P4P", sensitivity: "low",
+        id: "M12", name: "Wrap-Up & Next Steps", sensitivity: "low",
         status: "current", lastUpdated: "2026-04-10", lastAudited: "2026-04-10",
         sourceFile: "M12-wrap-up.md",
         features: [],
-        overview: "Recap, Q&A, Quick Translations reference card, and the bridge to ongoing learning through Postman for Postmanauts.",
-        learningObjectives: ["Synthesize the day's learning into a coherent mental model", "Know where to go for continued learning (P4P, Learning Center, Slack)", "Provide actionable feedback on the bootcamp experience"],
-        keyElements: ["Quick Translations: city metaphors → technical terms", "\"What to do next\": P4P program overview", "Resources: Field Guide, Learning Center, Slack channels", "Feedback collection"],
+        overview: "This final module brings the bootcamp to a close by synthesizing the day's learning into a coherent mental model, connecting participants to ongoing learning resources, and collecting feedback.",
+        learningObjectives: [],
+        keyElements: ["Part 1: The Big Picture — Bringing It All Together (10 minutes)", "Part 2: Quick Translations — Concepts to Terminology (10 minutes)", "Part 3: Resources & Next Steps (10 minutes)", "Part 4: Q&A (15 minutes)", "Part 5: The City Metaphor, Revisited (5 minutes)", "Part 6: Feedback & Closing (5 minutes)"],
         activity: null,
-        painPoint: null,
-        updateTriggers: ["P4P program changes", "New learning resources available", "Bootcamp strategic framing changes"],
+        painPoint: "This entire bootcamp addresses the biggest pain points organizations face with APIs:",
+        updateTriggers: ["New learning resources available", "Bootcamp strategic framing changes"],
+        lastAffected: null
+      }
+    ]
+  },
+  {
+    id: "101",
+    name: "API 101",
+    shortName: "101",
+    icon: "&#9679;",
+    description: "4-module hands-on workshop: discovering, documenting, testing, and prototyping APIs",
+    slidesLink: "",
+    sourceDir: "modules/101/",
+    modules: [
+      {
+        id: "101-01", name: "Discovering and Evaluating APIs", sensitivity: "medium",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "101-01-discovering-evaluating-apis.md",
+        features: ["Public API Network", "Private API Network", "Workspaces", "Collections", "Forking", "Variables", "Environments", "Secret Variables"],
+        overview: "Hands-on workshop where participants join a fictional company (PostVehicle Enterprises) and learn to discover APIs through the Public API Network, evaluate them by forking collections, set up workspaces for team collaboration, and manage variables and environments for secure API access. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Navigate the Postman API Network to discover and evaluate public APIs", "Fork collections into workspaces and use watches to track changes", "Set up environments with variables (including secret variables) to manage API credentials", "Understand workspace types (private, internal, team) and when to use each"],
+        keyElements: ["The Public API Network: Your Starting Point", "Workspaces: Where Collaboration Happens", "Collections: Executable Documentation", "Forking: Safe Experimentation", "Variables: Managing Dynamic Values", "Secret Variables: Protecting Credentials"],
+        activity: "### PostVehicle Scenario",
+        painPoint: "API Discovery Is Hard Without a Central Catalog\nTeams waste hours searching Slack threads, wikis, and email chains to find existing APIs. The Public API Network provides a searchable, browsable catalog with live documentation.",
+        updateTriggers: ["API Network UI changes", "Workspace type changes", "Variable scope changes", "Forking workflow changes", "Environment management updates"],
+        lastAffected: null
+      },
+      {
+        id: "101-02", name: "Documenting APIs", sensitivity: "medium",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "101-02-documenting-apis.md",
+        features: ["Collections", "API Documentation", "Examples", "Pull Requests", "Partner Workspaces", "Forking"],
+        overview: "Covers API documentation best practices and how Postman streamlines the documentation lifecycle. Participants learn to migrate legacy API docs into Postman collections, create examples for different response scenarios, use pull requests for collaborative documentation review, and share APIs securely with external partners through Partner Workspaces. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Understand different types of API documentation and who is responsible for each", "Create and manage request/response examples in collections", "Use pull requests to collaborate on documentation changes", "Set up Partner Workspaces with multi-partner mode for secure external sharing"],
+        keyElements: ["Types of API Documentation", "Writing Effective Documentation", "Postman Documentation Features", "Examples: Showing What Real Requests and Responses Look Like", "Pull Requests: Collaborative Documentation Review", "Partner Workspaces: Secure External Sharing"],
+        activity: "### PostVehicle Scenario",
+        painPoint: "Legacy API Documentation Becomes Outdated Quickly\nWiki pages, Google Docs, and README files are disconnected from the actual API. When an endpoint changes, someone has to remember to update every place the docs live. With Postman, the documentation is generated from the collection itself.",
+        updateTriggers: ["Documentation UI changes", "Pull request feature updates", "Partner Workspace changes", "Example management updates"],
+        lastAffected: null
+      },
+      {
+        id: "101-03", name: "Testing APIs", sensitivity: "high",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "101-03-testing-apis.md",
+        features: ["Test Scripts", "Collection Runner", "Postbot", "Package Library", "Collections", "Environments", "Scheduled Runs"],
+        overview: "Introduces API testing fundamentals using Postman's testing tools. Participants learn the typical testing workflow, how to write test scripts using code snippets, organize tests at collection/folder/request levels, use Postbot for AI-assisted test generation, leverage shared packages for reusable test logic, and automate collection runs with the Collection Runner. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Write post-response test scripts for common validation patterns (status codes, response format, data accuracy)", "Organize tests at collection, folder, and request levels understanding execution order", "Use the Collection Runner to automate test execution", "Leverage Postbot and shared packages to accelerate test development"],
+        keyElements: ["The Typical Testing Workflow", "Writing Test Scripts", "The Code Snippet Library", "Postbot: AI-Assisted Testing", "Package Library: Shared Reusable Test Logic", "Script Execution Order: Collection, Folder, Request"],
+        activity: "### PostVehicle Scenario",
+        painPoint: "Writing and Maintaining Test Scripts Is Tedious and Repetitive\nWithout tooling, every test is hand-written JavaScript. The same \"check status code 200\" assertion gets written hundreds of times across an organization.",
+        updateTriggers: ["Test script syntax or API changes", "Collection Runner UI changes", "Postbot capability updates", "Package Library changes", "Script execution order changes"],
+        lastAffected: null
+      },
+      {
+        id: "101-04", name: "Prototyping APIs with Mock Servers", sensitivity: "medium",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "101-04-prototyping-apis.md",
+        features: ["Mock Servers", "Examples", "Collections", "Environments", "Variables", "Collection Runner", "Postbot"],
+        overview: "Teaches API prototyping using mock servers in Postman. Participants learn to design API endpoints from requirements, create realistic examples with dynamic variables and contextual responses, set up mock servers for API simulation, write tests against mock servers, and transition from prototype to production testing. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Design API endpoints from business requirements using collections and examples", "Create mock servers that simulate realistic API behavior using dynamic variables", "Write and run test suites against mock servers to validate API design before implementation", "Transition test suites from mock to production environments"],
+        keyElements: ["API Design from Requirements", "Examples with Dynamic Variables", "Mock Server Creation and Configuration", "Mock Server Use Cases", "Testing Against Mock Servers", "Transitioning from Mock to Production"],
+        activity: "### PostVehicle Scenario",
+        painPoint: "Frontend Teams Blocked Waiting for Backend API Implementation\nThe classic dependency chain: product defines requirements, backend builds the API, frontend integrates. If backend is two sprints behind, frontend sits idle. Mock servers break this chain.",
+        updateTriggers: ["Mock server feature updates", "Dynamic variable changes", "Mock matching algorithm changes", "Example management updates", "Postbot capability updates"],
+        lastAffected: null
+      }
+    ]
+  },
+  {
+    id: "201",
+    name: "API 201 — Advanced",
+    shortName: "201",
+    icon: "&#9650;",
+    description: "4-module advanced workshop: prototyping, workflows, publishing, and integration testing",
+    slidesLink: "",
+    sourceDir: "modules/201/",
+    modules: [
+      {
+        id: "201-01", name: "Advanced API Prototyping", sensitivity: "medium",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "201-01-prototyping-apis.md",
+        features: ["Mock Servers", "Examples", "Collections", "Variables", "Environments", "Workspaces", "Postbot", "Collection Runner"],
+        overview: "Advanced mock server techniques including collaborative prototyping, dynamic variables with contextual mock responses ($body, $pathSegments, $headers, $queryParams template helpers), mock response matching strategies (x-mock-response-name/code/id headers, body/header matching), mock server configuration (delays, private servers), and team collaboration on prototypes using workspaces and comments. Builds on 101-04 fundamentals. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Create sophisticated mock responses using contextual template helpers ($body, $pathSegments)", "Configure mock response matching to return specific examples based on headers", "Collaborate on API prototypes using workspaces, comments, and team visibility", "Set up mock server configuration options (delays, privacy, body/header matching)"],
+        keyElements: ["Collaborative Prototyping Workflow", "Contextual Mock Responses", "Mock Response Matching Strategies", "Dynamic Variables (Faker Library)", "Mock Server Configuration", "Postbot Documentation Generation"],
+        activity: "### PostVehicle Scenario: Collaborative Account API Prototype",
+        painPoint: "Mock Responses Are Too Static and Don't Simulate Real API Behavior\n- Problem: Basic mocks return the same hardcoded JSON every time, regardless of input.",
+        updateTriggers: ["Mock server feature updates", "Dynamic variable changes", "Mock matching algorithm changes", "Postbot capability updates", "Workspace collaboration features"],
+        lastAffected: null
+      },
+      {
+        id: "201-02", name: "Building Use Cases and Workflows", sensitivity: "high",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "201-02-workflows-use-cases.md",
+        features: ["Collections", "Pre-request Scripts", "Post-response Scripts", "Variables", "Environments", "Collection Runner", "Postbot", "Authentication"],
+        overview: "Teaches how to build executable workflow documentation that chains multiple API calls together. Participants learn to orchestrate requests across different APIs using variables and scripts, manage authentication across services (API keys vs JWT tokens), use local variables for secure temporary data, leverage Postbot for documentation generation, and run complete workflows with the Collection Runner. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Build collections that chain requests across multiple APIs into executable workflows", "Manage different authentication methods within a single collection (API keys, JWT tokens)", "Use local variables to securely store temporary sensitive data during collection runs", "Write pre-request and post-response scripts that extract and pass data between requests"],
+        keyElements: ["Workflow Documentation: Executable Docs for Specific Use Cases", "Cross-API Orchestration", "Script Execution Order", "Local Variables: Secure Temporary Data", "Collection-Level vs Request-Level Authorization", "Dynamic Variables for Test Data"],
+        activity: "### PostVehicle Scenario: Register and Subscribe to a Service",
+        painPoint: "No Documented Examples of How to Use Multiple APIs Together for a Business Process\n- Problem: API documentation describes individual endpoints, but real use cases require calling multiple endpoints across multiple APIs in a specific sequence.",
+        updateTriggers: ["Script execution changes", "Variable scope changes", "Collection Runner updates", "Authentication feature changes", "Postbot capability updates"],
+        lastAffected: null
+      },
+      {
+        id: "201-03", name: "Publishing and Managing Internal APIs", sensitivity: "medium",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "201-03-publishing-internal-apis.md",
+        features: ["Private API Network", "Workspaces", "Collections", "Environments", "Role-Based Access Control"],
+        overview: "Covers publishing APIs to the Private API Network for internal discoverability, managing folder structures and permissions, using role-based access control (API Network Manager, Folder Manager roles), handling publish/approval workflows, and sharing API resources across the organization. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Publish collections and environments to the Private API Network with proper folder organization", "Understand the roles and permissions model for the API Network (Super Admin, API Network Manager, Folder Manager)", "Navigate the approval workflow for publishing to restricted network folders", "Broadcast API updates to the team using workspace update announcements"],
+        keyElements: ["Private API Network: The Internal API Catalog", "Publishing Workflow", "Role-Based Access Control", "Approval Workflow", "Workspace Updates and Announcements", "Folder Management"],
+        activity: "### PostVehicle Scenario: Publish and Organize the API Network",
+        painPoint: "Internal APIs Are Scattered Across Workspaces with No Central Catalog\n- Problem: Teams build APIs in their own workspaces, but no one outside the team knows the APIs exist.",
+        updateTriggers: ["Private API Network UI changes", "Role or permission changes", "Publishing workflow changes", "Folder management updates"],
+        lastAffected: null
+      },
+      {
+        id: "201-04", name: "Integration Testing and CI/CD", sensitivity: "high",
+        status: "current", lastUpdated: "2026-04-28", lastAudited: "2026-04-28",
+        sourceFile: "201-04-integration-testing.md",
+        features: ["Test Scripts", "Collection Runner", "Postman CLI", "Scheduled Runs", "Package Library", "Collections", "Environments", "Variables"],
+        overview: "Advanced testing techniques including integration test suites that validate multi-API workflows, data-driven testing with CSV/JSON files, external library loading in scripts, controlling execution order with pm.execution methods, scheduled runs for regression testing, and Postman CLI for CI/CD pipeline integration. These are v11 materials; the hub monitors for v12 changes.",
+        learningObjectives: ["Build integration test suites that validate workflows across multiple APIs", "Use data files (CSV/JSON) to drive parameterized test runs with multiple iterations", "Control execution flow using pm.execution.skipRequest() and postman.setNextRequest()", "Integrate collection runs into CI/CD pipelines using the Postman CLI"],
+        keyElements: ["Integration Testing Strategy: Setup, Test, Cleanup", "Data-Driven Testing", "External Libraries in Scripts", "Controlling Execution Order", "Package Library for Shared Test Utilities", "Postman CLI"],
+        activity: "### PostVehicle Scenario: Integration Test Suite for Remote Services v2",
+        painPoint: "Integration Tests That Span Multiple APIs Are Complex to Set Up and Maintain\n- Problem: Testing a workflow that touches User API, Vehicle API, and Services API requires careful orchestration — creating test data, managing auth tokens, passing IDs between requests, and cleaning up afterward.",
+        updateTriggers: ["Postman CLI changes", "Collection Runner updates", "Script execution changes", "Package Library changes", "Scheduled run or monitor changes", "Data file handling updates"],
         lastAffected: null
       }
     ]
   }
-  // To add a new class, create module files in modules/{program}/ following
-  // the schema in modules/SCHEMA.md, then add a class entry here.
-  // The system will create nav items, pages, and handle it identically.
-];
-
-const P4P_SESSIONS = [
-  { name: "Intro to Postman: Exploring the Tool", format: "Guided walkthrough", whoFor: "Anyone wanting a tour of core workflows", duration: "~60 min", category: "core" },
-  { name: "Why Do Customers Use Postman? (Four Pain Points)", format: "Deep dive discussion", whoFor: "GTM, customer-facing roles", duration: "~60 min", category: "core" },
-  { name: "What's New In V12", format: "Briefing + demo", whoFor: "Anyone wanting to understand the V12 shift", duration: "~45-60 min", category: "core" },
-  { name: "30 Minute Pit Stop", format: "Quick Q&A", whoFor: "Anyone with targeted questions", duration: "30 min", category: "quick" },
-  { name: "Specific Features", format: "Tailored walkthrough", whoFor: "Anyone wanting depth on a specific feature", duration: "~45 min", category: "advanced" },
-  { name: "Deeper Dive: Advanced Features", format: "Hands-on exploration", whoFor: "Anyone ready for complex features", duration: "~60 min", category: "advanced" },
-  { name: "Understanding APIs", format: "Conversational", whoFor: "Anyone building foundational API literacy", duration: "~45-60 min", category: "core" },
-  { name: "MCP & AI Agents: What They Mean for Us", format: "Briefing + demo", whoFor: "GTM and Engineering", duration: "~60 min", category: "new", isNew: true },
-  { name: "Postman CLI & Developer Workflow", format: "Hands-on walkthrough", whoFor: "Solutions, Support, Engineering", duration: "~45 min", category: "new", isNew: true },
-  { name: "Security & Governance in Postman", format: "Briefing + demo", whoFor: "Customer-facing teams", duration: "~45 min", category: "new", isNew: true }
+  // To add a new program, create module files in modules/{program}/ following
+  // the schema in modules/SCHEMA.md, register the program in sources.yaml,
+  // then run: python3 sync.py --write
 ];
 
 const PRODUCT_UPDATES = [
@@ -2509,7 +2776,6 @@ const PRODUCT_UPDATES = [
     plans: "Team, Enterprise",
     stage: "GA",
     modules: ["M08", "M09"],
-    sessions: ["MCP & AI Agents", "What's New in V12", "Specific Features"],
     status: "pending",
     author: "Sagiv Ofek"
   },
@@ -2522,7 +2788,6 @@ const PRODUCT_UPDATES = [
     plans: "All plans",
     stage: "Beta",
     modules: ["M05", "M09", "M10"],
-    sessions: ["Security & Governance", "Intro to Postman"],
     status: "pending",
     author: "Hitesh Sharma"
   },
@@ -2535,7 +2800,6 @@ const PRODUCT_UPDATES = [
     plans: "Enterprise",
     stage: "GA",
     modules: ["M11"],
-    sessions: ["What's New in V12"],
     status: "pending",
     author: "Ramji Enamuthu"
   },
@@ -2548,7 +2812,6 @@ const PRODUCT_UPDATES = [
     plans: "All plans",
     stage: "GA",
     modules: [],
-    sessions: [],
     status: "not-relevant",
     author: ""
   }
@@ -2563,13 +2826,6 @@ const WORKFLOW_STEPS = [
   { title: "Module files updated", desc: "Approved changes applied to individual module .md files. Hub reflects the new state automatically." }
 ];
 
-const CADENCE = [
-  { timing: "Weekly (Fridays)", what: "\"This Week in Postman\" digest", where: "Company-wide Slack", who: "All employees" },
-  { timing: "On major releases", what: "Targeted session promo", where: "Team channels + all-company", who: "Role-specific callouts" },
-  { timing: "Monthly (1st Monday)", what: "P4P Menu Refresh", where: "All-company + email", who: "All employees" },
-  { timing: "Post-bootcamp", what: "Personal follow-up", where: "DM or follow-up channel", who: "New hire cohorts" }
-];
-
 // ============================================================
 // STATE
 // ============================================================
@@ -2578,7 +2834,6 @@ let pendingChanges = {};
 let currentPage = "home";
 let activeHomeTab = "whats-new";
 let activeFilter = "all";
-let activeSessionFilter = "all";
 let selectedModules = {}; // tracks selected module per class, e.g. { bootcamp: "M01" }
 
 // Monthly digest — generated by the monthly-digest scheduled task.
@@ -2588,18 +2843,127 @@ let selectedModules = {}; // tracks selected module per class, e.g. { bootcamp: 
 const MONTHLY_DIGEST = [
   {
     id: "d1",
+    date: "Apr 27",
+    feature: "Invite Git Collaborators to Workspaces (Local Mode)",
+    stage: "GA",
+    plans: "All plans",
+    summary: "When working in a Local Mode workspace backed by a Git repo, Postman now surfaces your existing git collaborators as suggested invites. A new 'Invite collaborators' step appears in the Files Setup Guide, and a 'Suggested from Git' section shows up in the Invite to Workspace modal — so you can bring your team in with a couple of clicks instead of tracking down emails.",
+    whyItMatters: "Relevant to M06 (Native Git, branching) since it deepens the Git-connected workspace experience. Also touches M10 (Workspaces, UI changes) because it changes the onboarding flow for Local Mode workspaces. Worth mentioning in training when demonstrating workspace setup with Git repositories.",
+    affectedModules: ["M06", "M10"],
+    author: "Yash Porwal"
+  },
+  {
+    id: "d2",
+    date: "Apr 27",
+    feature: "Specification Version Tagging in SpecHub",
+    stage: "GA",
+    plans: "All plans",
+    summary: "You can now pin meaningful version tags on changelog entries in SpecHub (e.g. v1.0.0, v2.0-beta). Tagged versions get labeled badges in the changelog and sidebar, open in a read-only snapshot view, and have shareable URLs. Supports OpenAPI 2.0/3.0/3.1, AsyncAPI 2.0, GraphQL, Protobuf, and Smithy. Public API endpoints are also available for programmatic tagging in CI/CD pipelines.",
+    whyItMatters: "Directly affects M04 (API Builder, OpenAPI, spec formats) since version tagging is a new core capability for spec management. Also relevant to M06 (version history) as it adds a formal versioning layer on top of the changelog. The CI/CD integration angle is worth noting for M07 (Postman CLI & Developer Workflow).",
+    affectedModules: ["M04", "M06", "M07"],
+    author: "Ayush Shrivastav"
+  },
+  {
+    id: "d3",
+    date: "Apr 24",
+    feature: "Monitor Published Reports",
+    stage: "GA",
+    plans: "Solo, Team, Enterprise",
+    summary: "Monitor Published Reports has graduated to GA (Stage 7). Users can publish monitor reports and share them externally via a public, read-only URL — like a lightweight status page. The GA release brings improved public URL structure with domain consistency, Postman branding on public reports, enhanced stability in publish/unpublish flows, and full feature parity across EU. Enterprise plans include approval workflows for publish and edit actions.",
+    whyItMatters: "Now GA, this is ready to be incorporated into M07 (Postman CLI & CI/CD) content where we teach monitors and automation testing. The public URL sharing extends monitors into an external communication tool. The enterprise approval workflows are relevant to M11 (Governance). Module content should be updated to reflect this as a production-ready feature.",
+    affectedModules: ["M07", "M11"],
+    author: "Nikitha Achhini"
+  },
+  {
+    id: "d4",
+    date: "Apr 23",
+    feature: "New SDK Languages: Rust, Kotlin, and Ruby",
+    stage: "GA",
+    plans: "Team, Enterprise",
+    summary: "SDK-Gen now supports three additional languages: Rust, Ruby, and Kotlin. Customers can generate SDKs for their APIs in these languages with a single click or CLI command. This brings the total to 10 supported language generators: TypeScript, Java, Python, Go, C#, PHP, Rust, Ruby, Kotlin, and CLI.",
+    whyItMatters: "Expands the SDK generation story for M09 (The Postman Platform) — 10 languages is a significant breadth milestone. The CLI generation angle also connects to M08 (AI & Agents) since generated CLIs are usable by AI agents.",
+    affectedModules: ["M09"],
+    author: "Sagiv Ofek"
+  },
+  {
+    id: "d5",
+    date: "Apr 22",
+    feature: "Library Menu for Component and Package Discoverability",
+    stage: "Beta",
+    plans: "Free, Solo, Team",
+    summary: "A new 'Libraries' construct is being introduced as a top-level home for shared, reusable assets like packages and components. A Library Menu has been added to the status bar to improve discoverability. Previously, these building blocks were scattered across different workflows — now they have a unified entry point for better governance and access control.",
+    whyItMatters: "Affects M10 (Collections, Workspaces, UI changes) since this changes the navigation model with a new top-level construct. When this goes GA, it will impact how we teach asset organization and discoverability. Still in Beta (Stage 2), so flag it for awareness but don't update module content yet.",
+    affectedModules: ["M10"],
+    author: "Matt McCandless"
+  },
+  {
+    id: "d6",
+    date: "Apr 22",
+    feature: "System Metrics & Historical Debug Data for Performance Runs",
+    stage: "Beta",
+    plans: "Solo, Team, Enterprise",
+    summary: "Performance testing gets two major upgrades: real-time CPU and memory monitoring of your load generator (App, CLI, or CI/CD) with auto-abort at 95% load to prevent invalid results, and the ability to persist granular request-level error data for post-run analysis. Available in both the App (via a toggle) and CLI (via --persist-metrics flag).",
+    whyItMatters: "Relevant to M07 (Postman CLI & CI/CD) since performance testing is part of the automation workflow. The CLI flag and CI/CD support make this directly teachable. Still in Beta, so track it but don't change module content yet. When GA, this will strengthen the 'trustworthy testing' narrative.",
+    affectedModules: ["M07"],
+    author: "Saialekhya Yerragunta"
+  },
+  {
+    id: "d7",
+    date: "Apr 22",
+    feature: "Datasets in Local Mode",
+    stage: "Beta",
+    plans: "Solo, Team",
+    summary: "Datasets are a new data layer for API workflows. Instead of passing files into runs, you define datasets once and use them across collection runs, mocks, scripts, and automation. Supports local and remote files (CSV/JSON), connections to MySQL/PostgreSQL databases, and Agent Mode can help generate fake data and datasets on the fly.",
+    whyItMatters: "Touches M07 (CI/CD, environments) because datasets change how test data is managed in automation. Also relevant to M10 (Collections, Mocks, Environments) since datasets integrate across multiple workflow types. The Agent Mode integration is a nice M08 (AI & Agents) connection. Still Beta, so flag it but hold on module changes.",
+    affectedModules: ["M07", "M08", "M10"],
+    author: "Souris Ash"
+  },
+  {
+    id: "d8",
+    date: "Apr 21",
+    feature: "Simulator in Postman",
+    stage: "Beta",
+    plans: "All plans",
+    summary: "Simulator lets developers run their services alongside dependent mocks with real-life scenarios applied. You can add delay, errors, rate-limits, or failure rates on mocks and then test your collections and APIs for robustness and resilience. This goes beyond basic mocking into full API simulation territory.",
+    whyItMatters: "Relevant to M04 (Mock Servers) since this extends mocking into a new dimension — resilience and chaos testing. Also affects M10 (Mocks) where we do hands-on mock exercises. Still in Beta, but when GA this will be a compelling demo for the 'why mocks matter' narrative in training.",
+    affectedModules: ["M04", "M10"],
+    author: "Kartik Jain"
+  },
+  {
+    id: "d9",
+    date: "Apr 21",
+    feature: "Stateful Local Mocks",
+    stage: "Beta",
+    plans: "All plans",
+    summary: "Mock servers can now maintain state across requests, turning static responses into living, stateful services. Create a user on one endpoint and it exists when you query another. This is the foundation for true API simulation where mocks behave like real services rather than just returning canned responses.",
+    whyItMatters: "Big evolution for M04 (Mock Servers) — stateful mocks fundamentally change the mock narrative from 'fake responses' to 'simulated services.' Also relevant to M10 (Mocks) for hands-on exercises. Still Beta (Stage 5), but this is a major capability to track. When GA, it will require reworking how we teach mocking.",
+    affectedModules: ["M04", "M10"],
+    author: "Kartik Jain"
+  },
+  {
+    id: "d10",
+    date: "Apr 20",
+    feature: "Deploy Flows as MCP Servers",
+    stage: "GA",
+    plans: "All plans",
+    summary: "Two new capabilities that work hand-in-hand: a dedicated MCP trigger on the Start block to deploy Flows as MCP servers, and native support for attaching those MCP Flows as tools inside the AI Agent Block v2. Previously, deploying a Flow as an MCP server required manual configuration through Scenarios. Now it's one click, with Agent Mode integration to auto-generate the tool definition and build the flow together.",
+    whyItMatters: "Major update for M08 (Agent mode, MCP, Flows AI) — this makes Flows a first-class part of the MCP ecosystem. The ability to deploy a Flow as an MCP server and immediately use it as an agent tool is a powerful demo story.",
+    affectedModules: ["M08"],
+    author: "Cyrielle"
+  },
+  {
+    id: "d11",
     date: "Apr 20",
     feature: "API Catalog Live in EU Region",
     stage: "GA",
     plans: "Enterprise",
     summary: "The API Catalog is now fully functional in the EU region, including API Gateway import, Insights, Cluster Watcher, service discovery with GitHub integration, and event ingestion via Postman CLI, monitors, and collection runs. Agent Mode and API Catalog Manager RBAC are not yet available in the EU deployment.",
-    whyItMatters: "Relevant to M11 (API Catalog & Governance) as it expands the geographic availability of the catalog. Worth noting in the 'Security & Governance' P4P session since EU data residency is a frequent enterprise concern. No module content changes needed, but good awareness for enterprise-focused training conversations.",
+    whyItMatters: "Relevant to M11 (API Catalog & Governance) as it expands the geographic availability of the catalog. EU data residency is a frequent enterprise concern. No module content changes needed, but good awareness for enterprise-focused training conversations.",
     affectedModules: ["M11"],
-    affectedSessions: ["Security & Governance", "What's New in V12"],
     author: "Shrey Shah"
   },
   {
-    id: "d2",
+    id: "d12",
     date: "Apr 17",
     feature: "Personal Workspace in Unified Analytics",
     stage: "GA",
@@ -2607,11 +2971,10 @@ const MONTHLY_DIGEST = [
     summary: "Unified Analytics now includes personal workspace activity in its metrics. The Overview Page metrics — Active Workspaces, Top 5 workspaces by API requests sent, and Top 5 collections by API requests sent — now reflect personal workspace data, giving teams a more complete picture of overall workspace activity.",
     whyItMatters: "Directly affects M11 (API Catalog, Insights & Governance) where we teach analytics and reporting. Previously, personal workspace activity was a blind spot — now the data is comprehensive. This strengthens the governance narrative: teams can see the full picture of how Postman is being used across the organization.",
     affectedModules: ["M11"],
-    affectedSessions: ["What's New in V12", "Security & Governance"],
     author: "Harikrishna Sunkari"
   },
   {
-    id: "d3",
+    id: "d13",
     date: "Apr 16",
     feature: "Multiforking Collections",
     stage: "GA",
@@ -2619,23 +2982,21 @@ const MONTHLY_DIGEST = [
     summary: "External developers can now fork multiple collections at once from a partner portal, along with pre-configured environments and mock servers. This replaces the previous one-by-one fork and manual environment variable copy-paste flow, significantly streamlining the onboarding experience for partner API consumers.",
     whyItMatters: "Relevant to M10 (Collections, Workspaces, Forking) since forking is a core hands-on concept we teach. The multi-fork capability changes how we frame the partner/consumer experience. Also touches M06 (version control) tangentially since forking is part of the broader collaboration and versioning story.",
     affectedModules: ["M10", "M06"],
-    affectedSessions: ["Intro to Postman", "What's New in V12"],
     author: "Bryan Zhu"
   },
   {
-    id: "d4",
+    id: "d14",
     date: "Apr 16",
     feature: "Postman Atlas — 600+ Public APIs on the API Network",
     stage: "GA",
     plans: "All plans",
     summary: "Postman Atlas has launched high-quality, auto-maintained workspaces for 679+ of the world's most widely used public APIs, including GitHub, Slack, Anthropic, Jira, SendGrid, and ElevenLabs. Generated from developer docs and OpenAPI specs, these workspaces stay automatically up to date. Atlas also supports MCP servers and non-HTTP requests for agent-driven workflows.",
-    whyItMatters: "Big for M08 (AI & Agents) given the MCP server support and agent workflow angle. Also relevant to M09 (The Postman Platform) as it strengthens the 'source of truth for APIs' narrative. Worth highlighting in the 'MCP & AI Agents' P4P session since Atlas bridges human and AI agent API consumption.",
+    whyItMatters: "Big for M08 (AI & Agents) given the MCP server support and agent workflow angle. Also relevant to M09 (The Postman Platform) as it strengthens the 'source of truth for APIs' narrative. Atlas bridges human and AI agent API consumption.",
     affectedModules: ["M08", "M09"],
-    affectedSessions: ["MCP & AI Agents", "What's New in V12", "Why Customers Use Postman"],
     author: "Aris Villareal"
   },
   {
-    id: "d5",
+    id: "d15",
     date: "Apr 15",
     feature: "Multi-Entity Sidebar (Custom Panels)",
     stage: "Beta",
@@ -2643,23 +3004,10 @@ const MONTHLY_DIGEST = [
     summary: "Sidebar panels are now customizable and support multiple entity types side-by-side. Users can rename, create, and delete panels, drag-and-drop items between them, and mix entity types — for example, keeping environments next to collections in the same panel.",
     whyItMatters: "Affects M10 (Collections, Workspaces, UI changes) since the sidebar is a core navigation element we demonstrate constantly. When this goes GA, we'll need to update any screenshots or walkthrough instructions that reference the sidebar layout. Still in Beta (Stage 2), so flag it but don't change module content yet.",
     affectedModules: ["M10"],
-    affectedSessions: ["Intro to Postman", "What's New in V12"],
     author: "Mike Bell"
   },
   {
-    id: "d6",
-    date: "Apr 14",
-    feature: "Monitor Published Reports",
-    stage: "Beta",
-    plans: "Solo, Team, Enterprise",
-    summary: "Users can now publish monitor reports and share them externally via a public, read-only URL — functioning like a lightweight status page. Published reports show success rates, recent execution history, failure insights, and request-level performance metrics without requiring workspace access. Enterprise plans get approval workflows for publish and edit actions.",
-    whyItMatters: "Relevant to M07 (Postman CLI & CI/CD) since monitors are part of the automation testing workflow. The public URL sharing is a new capability that extends monitors beyond internal use. Also touches M11 (Governance) with the enterprise approval workflows. Still Beta, so worth tracking but no module changes needed yet.",
-    affectedModules: ["M07", "M11"],
-    affectedSessions: ["Postman CLI & Developer Workflow", "What's New in V12"],
-    author: "Nikitha Achhini"
-  },
-  {
-    id: "d7",
+    id: "d16",
     date: "Apr 8",
     feature: "CLI Generator",
     stage: "GA",
@@ -2667,11 +3015,10 @@ const MONTHLY_DIGEST = [
     summary: "You can now generate a fully functional CLI for any API defined in Postman — in one click. The generated CLI supports multi-auth, comes with built-in skills, and uses a Go SDK under the hood. It's usable by both humans and AI agents, making it a natural bridge between Postman's API ecosystem and agentic workflows.",
     whyItMatters: "This is a big deal for M08 (AI & Agents) and M09 (The Postman Platform). The CLI Generator is a concrete example of how Postman is becoming an agentic platform — APIs aren't just for humans to call anymore, they're for agents too. It also expands the platform story beyond the GUI.",
     affectedModules: ["M08", "M09"],
-    affectedSessions: ["MCP & AI Agents", "What's New in V12", "Specific Features"],
     author: "Sagiv Ofek"
   },
   {
-    id: "d8",
+    id: "d17",
     date: "Apr 7",
     feature: "Secrets Resolution & Shared Vault",
     stage: "Beta",
@@ -2679,23 +3026,21 @@ const MONTHLY_DIGEST = [
     summary: "Secrets are now a first-class concept in Postman. They're resolved just-in-time and never stored in plain text. The new Shared Vault lets teams manage credentials centrally — no more passing API keys through Slack or shared docs.",
     whyItMatters: "This changes how we teach security in M05. The old narrative was 'be careful with your keys' — now it's 'Postman handles this for you.' Also relevant to M09 (platform capabilities) and M10 (the hands-on lab, where students set up auth). Still in Beta, so we flag it but don't restructure modules yet.",
     affectedModules: ["M05", "M09", "M10"],
-    affectedSessions: ["Security & Governance", "Intro to Postman"],
     author: "Hitesh Sharma"
   },
   {
-    id: "d9",
+    id: "d18",
     date: "Apr 7",
     feature: "Publisher Self-Serve Verification",
     stage: "GA",
     plans: "All plans",
     summary: "API publishers can now verify domain ownership themselves — either through a DNS record or by adding a 'Run in Postman' button. This replaces the previous multi-step manual flow, making it much faster to get verified on the API Network.",
-    whyItMatters: "A nice quality-of-life improvement for the API Network, but doesn't directly affect any bootcamp modules or P4P sessions. Good to know about for general product awareness.",
+    whyItMatters: "A nice quality-of-life improvement for the API Network, but doesn't directly affect any bootcamp modules. Good to know about for general product awareness.",
     affectedModules: [],
-    affectedSessions: [],
     author: "Igor Syvets"
   },
   {
-    id: "d10",
+    id: "d19",
     date: "Apr 3",
     feature: "Reports — Hourly Updates",
     stage: "GA",
@@ -2703,11 +3048,10 @@ const MONTHLY_DIGEST = [
     summary: "Reports now refresh hourly instead of monthly. New Sankey chart visualizations give partner analytics a much clearer flow view. Everything is also available programmatically via the /analytics API endpoint.",
     whyItMatters: "Relevant to M11 (API Lifecycle & Governance) where we discuss Insights and reporting. The jump from monthly to hourly reporting strengthens the 'real-time governance' narrative. The API endpoint is a nice proof point for the platform story.",
     affectedModules: ["M11"],
-    affectedSessions: ["What's New in V12"],
     author: "Ramji Enamuthu"
   },
   {
-    id: "d11",
+    id: "d20",
     date: "Apr 3",
     feature: "Postman API v1.38.0 — Workspaces Pagination, API Catalog & Specs Updates",
     stage: "GA",
@@ -2715,7 +3059,6 @@ const MONTHLY_DIGEST = [
     summary: "The Postman API now supports pagination on the Workspaces endpoint (significantly reducing token consumption for agents), adds seven new system environment endpoints for the API Catalog, and returns fileFormat metadata on the Specs endpoint. This is a developer-facing release that improves both programmatic access and the API Catalog management experience.",
     whyItMatters: "Touches M07 (Postman CLI & Developer Workflow) because workspace pagination directly improves agent and CI/CD integrations. Also relevant to M11 (API Catalog & Governance) with the new system environment endpoints for managing deployment stages. The reduced token consumption is a practical talking point for M08 (AI & Agents) when discussing how agents interact with Postman's API.",
     affectedModules: ["M07", "M08", "M11"],
-    affectedSessions: ["Postman CLI & Developer Workflow", "What's New in V12", "Specific Features"],
     author: "Christos Gkoros"
   }
 ];
@@ -2787,7 +3130,6 @@ function renderNav() {
     </div>
   `).join("");
 
-  document.getElementById("p4p-count").textContent = P4P_SESSIONS.length;
 }
 
 function renderHomeStats() {
@@ -2811,8 +3153,8 @@ function renderHomeStats() {
       <div class="stat-label">Needs update</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">${P4P_SESSIONS.length}</div>
-      <div class="stat-label">P4P sessions</div>
+      <div class="stat-value">${CLASSES.length}</div>
+      <div class="stat-label">Programs</div>
     </div>
   `;
 }
@@ -3158,49 +3500,6 @@ function renderDigest() {
   `).join("") + `</div>`;
 }
 
-function renderSessionGrid(filter = "all") {
-  const container = document.getElementById("session-grid");
-  const sessions = filter === "all" ? P4P_SESSIONS : P4P_SESSIONS.filter(s => s.category === filter);
-  const catClass = { core: "cat-core", advanced: "cat-advanced", quick: "cat-quick", new: "cat-new" };
-  const catLabel = { core: "Core", advanced: "Advanced", quick: "Quick", new: "Recommended" };
-
-  container.innerHTML = sessions.map(s => `
-    <div class="session-card">
-      <div class="session-name">
-        ${s.name}
-        ${s.isNew ? '<span class="new-tag">New</span>' : ''}
-      </div>
-      <div class="session-detail"><strong>Format:</strong> ${s.format}</div>
-      <div class="session-detail"><strong>For:</strong> ${s.whoFor}</div>
-      <div class="session-detail"><strong>Duration:</strong> ${s.duration}</div>
-      <span class="session-category ${catClass[s.category] || ''}">${catLabel[s.category] || s.category}</span>
-    </div>
-  `).join("");
-}
-
-function renderSessionFilters() {
-  const container = document.getElementById("session-filters");
-  const cats = ["all", "core", "advanced", "quick", "new"];
-  const labels = { all: "All", core: "Core", advanced: "Advanced", quick: "Quick", new: "Recommended" };
-  const counts = { all: P4P_SESSIONS.length };
-  cats.forEach(c => { if (c !== "all") counts[c] = P4P_SESSIONS.filter(s => s.category === c).length; });
-
-  container.innerHTML = cats.map(c => `
-    <button class="filter-pill ${activeSessionFilter === c ? 'active' : ''}" onclick="filterSessions('${c}')">${labels[c]} (${counts[c]})</button>
-  `).join("");
-}
-
-function renderCadence() {
-  document.getElementById("cadence-body").innerHTML = `
-    <table class="updates-table">
-      <thead><tr><th>Timing</th><th>What</th><th>Where</th><th>Who</th></tr></thead>
-      <tbody>
-        ${CADENCE.map(c => `<tr><td style="font-weight:600;font-size:13px;">${c.timing}</td><td style="font-size:13px;">${c.what}</td><td style="font-size:13px;color:var(--text-secondary)">${c.where}</td><td style="font-size:13px;color:var(--text-secondary)">${c.who}</td></tr>`).join("")}
-      </tbody>
-    </table>
-  `;
-}
-
 // ============================================================
 // MODULE DETAIL MODAL
 // ============================================================
@@ -3338,12 +3637,6 @@ function filterModules(classId, impact) {
   }
 }
 
-function filterSessions(category) {
-  activeSessionFilter = category;
-  renderSessionFilters();
-  renderSessionGrid(category);
-}
-
 // ============================================================
 // COLLAPSIBLE
 // ============================================================
@@ -3424,9 +3717,6 @@ function init() {
   renderUpdatesTable();
   renderWorkflow();
   renderClassPages();
-  renderSessionFilters();
-  renderSessionGrid();
-  renderCadence();
 }
 
 init();

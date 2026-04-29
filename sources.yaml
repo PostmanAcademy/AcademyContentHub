@@ -1,0 +1,175 @@
+# ═══════════════════════════════════════════════════════════════
+# Training Content Sync — Data Sources Registry
+# ═══════════════════════════════════════════════════════════════
+#
+# This file is the single config that tells the monitoring system
+# WHERE to look for product changes and which programs to check.
+#
+# Adding a source = adding a block below. No skill editing needed.
+# Adding a program = adding a block + creating a modules/ folder +
+#                    running: python3 sync.py --write
+#
+# Skills read this file at runtime.
+# ═══════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────
+# SLACK CHANNELS — scanned for product updates
+# ───────────────────────────────────────────────────────────────
+slack_channels:
+
+  - id: product-updates
+    name: "#product-updates"
+    channel_id: C08SPKCGZQ8
+    purpose: "Primary source for all Postman product releases"
+    scan_frequency: daily          # daily | weekly | monthly
+    lookback_days: 7               # how many days back to read
+    feature_domains:               # which feature areas this channel covers
+      - all                        # "all" = covers every domain
+    notes: >
+      The canonical product changelog channel. Every shipped feature
+      gets posted here with stage, plan tiers, and demo links.
+
+  # ── Add more Slack channels below ─────────────────────────────
+  # Copy this block, fill in the channel_id, and you're done.
+  #
+  # - id: engineering-releases
+  #   name: "#engineering-releases"
+  #   channel_id: CXXXXXXXXXX
+  #   purpose: "Engineering-specific releases and infrastructure changes"
+  #   scan_frequency: weekly
+  #   lookback_days: 7
+  #   feature_domains:
+  #     - CLI
+  #     - CI/CD
+  #     - infrastructure
+
+# ───────────────────────────────────────────────────────────────
+# PROGRAMS — which training programs exist and where their
+#             module files live. Skills scan ALL programs listed here.
+#
+# The sync script (sync.py) reads this to generate the hub's
+# CLASSES data array. Teammates see the hub — they never touch
+# these files. You maintain the .md files; sync.py updates the hub.
+# ───────────────────────────────────────────────────────────────
+programs:
+
+  - id: bootcamp
+    name: "Fundamentals Bootcamp"
+    description: "12-module new-hire onboarding program"
+    module_dir: "modules/bootcamp/"
+    module_prefix: "M"            # Module IDs start with M01, M02...
+    active: true
+    drive_sources:                 # Google Drive docs the review skill
+                                   # can read to verify actual content
+      - id: "1NpnHUJy2_6C_jarRMmEitHi_KAdGz3YdtZOyK64ExOU"
+        name: "Postman V12 Fundamentals (Slides)"
+        type: presentation
+      - id: "1GFnZXgZZhTFRVn5UnHvhCvkz_zQGgYDbGc9ZyHsdqts"
+        name: "What's New in Postman V12 (Facilitator Guide)"
+        type: document
+
+  - id: "101"
+    name: "API 101"
+    description: "4-module hands-on workshop: discovering, documenting, testing, and prototyping APIs"
+    module_dir: "modules/101/"
+    module_prefix: "101"
+    active: true
+    drive_sources:
+      - id: "1lgbLFXZLSp45jOugmgrxPbI8UBvdhYJ_"
+        name: "101 — Discovering and Evaluating APIs (Slides)"
+        type: presentation
+      - id: "1wJ4VLt6hhmtWt8Q6R5tJ6Z9IXNQC0t8Q"
+        name: "101 — Discovering and Evaluating APIs (IG)"
+        type: document
+      - id: "15Aorx84oATc5-vrSWCZtfjQAQACJHP4s"
+        name: "102 — Documenting APIs (Slides)"
+        type: presentation
+      - id: "1S0Wq0dGYvNOCieZFUBL7jsRjx-E9j-ae"
+        name: "102 — Documenting APIs (IG)"
+        type: document
+      - id: "1Dn41PiYEZV3dS4Um2xMFReddVWg3Kwyr"
+        name: "103 — Testing APIs (Slides)"
+        type: presentation
+      - id: "1YleLx6XFSe7uE5yZdPKOO4PgvJ3DRnHf"
+        name: "103 — Testing APIs (IG)"
+        type: document
+      - id: "1XPKDv85azC7yCzRE2Yhzgnuu2jWsBR0D"
+        name: "104 — Prototyping APIs (Slides)"
+        type: presentation
+      - id: "1MJRm-HToM2FM7XuqCSbhg_7xk-73fUTz"
+        name: "104 — Prototyping APIs (IG)"
+        type: document
+
+  - id: "201"
+    name: "API 201 — Advanced"
+    description: "4-module advanced workshop: prototyping, workflows, publishing, and integration testing"
+    module_dir: "modules/201/"
+    module_prefix: "201"
+    active: true
+    drive_sources:
+      - id: "1-3U9bX0IrmMxMMHEehg-YuFASVpEyIMS"
+        name: "201 — Prototyping APIs (Slides)"
+        type: presentation
+      - id: "1jiHHgEWThFZ7BwgaO8BTgOfw7u8Fp_6Z"
+        name: "201 — Prototyping APIs (IG)"
+        type: document
+      - id: "1248KvGYNolvcIQeYfN2PO91K3vKXACZN"
+        name: "202 — Building Use Cases and Workflows (Slides)"
+        type: presentation
+      - id: "1BZTaLLwlcOVTCPzcwHJ1poRoE5IMy-d_"
+        name: "202 — Building Use Cases and Workflows (IG)"
+        type: document
+      - id: "1hZH9aBTAoRbIXoi_xJwOp5gv0dMLfgYK"
+        name: "203 — Publishing and Managing Internal APIs (Slides)"
+        type: presentation
+      - id: "1bMIa4Gb1IXHQPnqE-TEPCFsJ0_RdCbRo"
+        name: "203 — Publishing and Managing Internal APIs (IG)"
+        type: document
+      - id: "1AcfXb9hrITp1ijg9yReL5vUZMmGSesoI"
+        name: "204 — Testing API Functionality (Slides)"
+        type: presentation
+      - id: "1YxtAB0IV5a2EiLyeEGJ74Q-p3egKsBLA"
+        name: "204 — Testing API Functionality (IG)"
+        type: document
+
+  # ── Add more programs below ───────────────────────────────────
+  # To add a new program:
+  #   1. Create the folder: modules/{name}/
+  #   2. Add .md files following modules/SCHEMA.md
+  #   3. Add a program entry here with drive_sources
+  #   4. Run: /scaffold-program to generate modules from Drive
+  #   The hub and skills pick it up automatically.
+
+# ───────────────────────────────────────────────────────────────
+# REFERENCE DOCS — links for humans, not scanned automatically
+# These are design rationale and source materials. Link them here
+# so they appear in the hub's Settings page.
+# ───────────────────────────────────────────────────────────────
+reference_docs:
+
+  - name: "V11 Bootcamp Flow"
+    url: "https://docs.google.com/document/d/1D7o7IYvkrQm2FeCgbh7SisnzF4Xlbc6pA1QJInGh-y4/edit"
+    purpose: "Original facilitator flow"
+
+  - name: "Bootcamp Review & Analysis"
+    url: "https://docs.google.com/document/d/1D14mLqe-BIz3dseLtvF9IVgUClZmfCICfFERnfStnog/edit"
+    purpose: "Analysis of what needed restructuring"
+
+  - name: "New Hire Bootcamp Refresh Guide"
+    url: "https://docs.google.com/document/d/1Uo1oHwETRLwxCRA40Hc1am5toD1TrI3QmUQSuCZ7Y_8/edit"
+    purpose: "Digital Grocery Store hands-on modules"
+
+  - name: "Postman V12 Wiki"
+    url: "https://postmanlabs.atlassian.net/wiki/spaces/v12/pages/7131791735/Postman+v12"
+    purpose: "Internal V12 product documentation (Confluence)"
+
+# ───────────────────────────────────────────────────────────────
+# COVERAGE GAP DETECTION — the safety net
+# ───────────────────────────────────────────────────────────────
+coverage_settings:
+  # When a product update mentions a feature that NO module in ANY
+  # program lists in its postman_features frontmatter, flag it in
+  # the Product Update Review document.
+  notify_on_gap: true              # include gap warnings in reviews
+  alert_threshold: 3               # number of uncovered features
+                                    # before highlighting in review

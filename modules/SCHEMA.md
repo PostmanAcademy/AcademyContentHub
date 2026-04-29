@@ -1,6 +1,6 @@
 # Module Markdown Schema
 
-> **Purpose:** Defines the standard format for all training module files. Every module — bootcamp, P4P class, or future program — follows this schema so the hub can parse, display, and monitor it for product update impacts.
+> **Purpose:** Defines the standard format for all training module files. Every module — bootcamp, workshop, or future program — follows this schema so the hub can parse, display, and monitor it for product update impacts.
 
 ---
 
@@ -12,7 +12,7 @@ Every module file starts with YAML frontmatter between `---` fences. This is the
 ---
 id: M04                              # Unique identifier
 title: "API Design & Architecture"   # Display name
-program: bootcamp                    # Program this belongs to (bootcamp, p4p, etc.)
+program: bootcamp                    # Program this belongs to (bootcamp, 101, 201, etc.)
 owner: Marcus Kidan                  # Who maintains this module
 change_sensitivity: medium           # low | medium | high
 status: current                      # current | needs_review | update_in_progress | outdated
@@ -35,7 +35,7 @@ update_triggers:                     # What kinds of product changes should flag
 
 | Field | Required | Type | Purpose |
 |-------|----------|------|---------|
-| `id` | Yes | string | Unique module ID (M01, P4P-101, etc.) |
+| `id` | Yes | string | Unique module ID (M01, 101-01, 201-01, etc.) |
 | `title` | Yes | string | Human-readable name |
 | `program` | Yes | string | Which program this belongs to |
 | `owner` | Yes | string | Content owner |
@@ -80,9 +80,6 @@ modules/
     M01-welcome.md
     M02-internet-apis.md
     ...
-  p4p/                    # Future
-    P4P-101-api-basics.md
-    P4P-201-advanced.md
 ```
 
 Pattern: `{ID}-{slug}.md` where the slug is a lowercase, hyphenated short name.

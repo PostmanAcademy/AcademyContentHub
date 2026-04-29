@@ -269,7 +269,7 @@ Each module maps to one or more layers from your Field Guide, content from V11/V
 
 ---
 
-#### Module 12: Wrap-Up & Bridge to Postman for Postmanauts
+#### Module 12: Wrap-Up & Next Steps
 **Field Guide Layers:** Quick Translations
 **Change Sensitivity:** 🟢 Low
 
@@ -277,12 +277,12 @@ Each module maps to one or more layers from your Field Guide, content from V11/V
 
 **Key elements:**
 - Quick Translations from Field Guide: a rapid-fire reference card mapping city metaphors to technical terms
-- "What to do next": how to stay current with Postman for Postmanauts (the just-in-time program for all employees)
+- "What to do next": how to stay current with ongoing workshops and learning resources
 - Resources: Field Guide link, Postman Learning Center, internal Slack channels
 - Feedback collection
 
 **Postman features referenced:** None directly
-**When to update:** When Postman for Postmanauts program changes, or when new learning resources are available
+**When to update:** When new learning resources are available or bootcamp strategic framing changes
 
 ---
 
@@ -452,7 +452,7 @@ When you're ready to create the module registry in Airtable, here's the structur
 | M09 | The Postman Platform | 🔴 High | All major product areas |
 | M10 | Hands-On Lab (Grocery Store) | 🔴 High | Collections, Workspaces, Forking, Agent Mode, Mocks, API Network |
 | M11 | API Lifecycle & Governance | 🟡 Medium | API Catalog, Insights, Governance |
-| M12 | Wrap-Up & Bridge to P4P | 🟢 Low | None |
+| M12 | Wrap-Up & Next Steps | 🟢 Low | None |
 
 Cowork can create this Airtable structure for you anytime — just say the word.
 

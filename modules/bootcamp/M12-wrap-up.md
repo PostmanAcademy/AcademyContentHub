@@ -1,6 +1,6 @@
 ---
 id: M12
-title: "Wrap-Up & Bridge to Postman for Postmanauts"
+title: "Wrap-Up & Next Steps"
 program: bootcamp
 owner: Marcus Kidan
 change_sensitivity: low
@@ -11,7 +11,6 @@ last_audited: 2026-04-10
 postman_features: []
 
 update_triggers:
-  - "P4P program changes"
   - "New learning resources available"
   - "Bootcamp strategic framing changes"
 ---
@@ -34,7 +33,7 @@ Now we tie these together, answer remaining questions, and set participants up f
 By the end of this module, participants will be able to:
 
 1. **Synthesize the day's learning** into a coherent mental model of Postman and API development
-2. **Know where to go** for continued learning (Postman for Postmanauts, Learning Center, internal resources)
+2. **Know where to go** for continued learning (Learning Center, workshops, internal resources)
 3. **Provide actionable feedback** on the bootcamp experience and identify gaps in their own knowledge
 4. **Commit to next steps** in using Postman in their daily work
 
@@ -132,7 +131,7 @@ You've completed the bootcamp. Here's where to go next:
 
 #### **Learning Resources**
 
-**Postman for Postmanauts (P4P)**
+**Ongoing Workshops & Learning**
 - Weekly live sessions on specific Postman features
 - Q&A with Postman experts
 - Deeper dives into topics from this bootcamp
@@ -305,11 +304,11 @@ We want to make this bootcamp better. Please take 5 minutes to answer these ques
 - "This doesn't work in our organization" → Acknowledge the constraint, ask what would need to change, offer to connect with the Postman team
 - "This seems like overkill for our use case" → It probably is; Postman scales from 1-person teams to enterprises
 - "We're already using [other tool]" → Postman complements other tools; ask how they could work together
-- "I don't see value yet" → That's okay; point them to Postman for Postmanauts and ask them to revisit in a month
+- "I don't see value yet" → That's okay; point them to upcoming workshops and ask them to revisit in a month
 
 **Follow-Up:**
 - Send a follow-up email with all resource links within 24 hours
-- Invite everyone to the next Postman for Postmanauts session (schedule it in the follow-up email)
+- Invite everyone to the next workshop session (schedule it in the follow-up email)
 - Create a Slack channel for bootcamp participants to ask questions and share learnings
 - Check in 1 week: "Have you created your first collection? What blockers have you hit?"
 
@@ -352,7 +351,7 @@ In **3 months**, they'll have:
 - [ ] Integrated Postman into their development workflow
 - [ ] Contributed to an API Catalog
 - [ ] Run tests in CI/CD with Postman CLI
-- [ ] Attended at least one Postman for Postmanauts session
+- [ ] Attended at least one follow-up workshop
 
 In **6 months**, they'll have:
 - [ ] Helped define API governance standards for their team
@@ -387,12 +386,12 @@ In **6 months**, they'll have:
 ### Going Deeper
 - **Scripting & Automation:** Postman Learning Center → Guides → Scripting
 - **CI/CD Integration:** Postman Learning Center → Guides → Integrations
-- **Governance at Scale:** P4P session (sign up in `#postman-for-postmanauts`)
+- **Governance at Scale:** Advanced workshop (check internal calendar)
 - **Postman Flows:** Low-code automation (advanced feature)
 
 ### By Role (Detailed Resources)
 - **Developers:** Learning Center → Collections, Requests, Scripting
-- **QA:** Learning Center → Testing, Monitoring; P4P session on AI test generation
+- **QA:** Learning Center → Testing, Monitoring; Workshop on AI test generation
 - **DevOps:** Learning Center → CLI, Integrations; Postman Learning Center → CI/CD
 - **Product Managers:** Insights dashboard (request access in `#postman-help`)
 - **Tech Writers:** Learning Center → Documentation; Auto-docs feature
